@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magh/app_theme/app_colors.dart';
 import 'package:magh/routes/app_routes.dart';
 
 
+
+/// provider , notifier provider, future provider, async notifier provider, stream provider
+
 void main (){
 
-runApp(Home());
+runApp(ProviderScope(child: Home()));
 }
 
 

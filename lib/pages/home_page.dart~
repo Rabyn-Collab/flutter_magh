@@ -1,84 +1,34 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:magh/app_theme/app_sizes.dart';
-import 'package:magh/pages/widgets/book_list.dart';
-import 'package:magh/pages/widgets/carousel_widget.dart';
-import 'package:magh/pages/widgets/stack_widget.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:magh/providers/provider.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Hi John,'),
-          actions: [
-            IconButton(
-                onPressed: () {
-            }, icon: Icon(CupertinoIcons.search)),
-            IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.bell)),
-
-            // Icon(CupertinoIcons.arrow_left_circle_fill),
-            // Icon(Icons.accessible_forward_rounded),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(' Providers'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            Text('This is normal provider'),
+            Consumer(
+              builder: (c, ref, child) {
+                int someNumber = ref.watch(someVar);
+                return InkWell(
+                    onTap: (){
+                      someNumber++;
+                    },
+                    child: Text('$someNumber'));
+              }
+            ),
           ],
-          // flexibleSpace: Column(
-          //   children: [
-          //     Text('asldk'),
-          //   ],
-          // ),
-          // centerTitle: true,
-          bottom: TabBar(
-              tabs: [
-                Tab(text: 'First Page',),
-                Tab(text: 'Second Page',),
-                Tab(text: 'Third Page',),
-              ]
-          ),
         ),
-        body: TabBarView(
-            children: [
-
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: ListView(
-
-                  children: [
-
-                   // StackWidget(),
-
-
-                    AppSizes.gapH10,
-                    ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50) ,
-                          bottomRight: Radius.circular(90)
-                        ),
-                        child: Image.asset('assets/images/peter-herrmann-PSD0PPhxUgE-unsplash.jpg')),
-
-                  AppSizes.gapH16,
-
-                    BookList(),
-                    AppSizes.gapH16,
-                    CarouselWidget()
-
-                  ],
-                ),
-              ),
-              Text('as;ldklas;kd;salkd;lsakd;lksd;lksd;laksd;lsa'),
-              Text('as;ldklas;kd;salkd;lsakd;lksd;lksd;laksd;lsa'),
-
-
-              ]
-        )
-
-
-
-
       ),
     );
   }
