@@ -9,6 +9,9 @@ import 'package:magh/routes/app_routes.dart';
 
 void main (){
 
+  // final somes  = [11,22,33,];
+  // print([...somes, 99]);
+
 runApp(ProviderScope(child: Home()));
 }
 

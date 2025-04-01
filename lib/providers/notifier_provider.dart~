@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magh/models/todo.dart';
-import 'package:uuid/uuid.dart';
+
 
 
 
@@ -13,7 +13,7 @@ class TodoProvider extends Notifier<List<Todo>>{
 
    void addTodo(String todo){
     final newTodo = Todo(
-        id: Uuid().v4(),
+        id: id,
         isCompleted: false,
         todo: todo
     );
