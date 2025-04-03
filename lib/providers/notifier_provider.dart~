@@ -4,57 +4,19 @@ import 'package:magh/models/todo.dart';
 
 
 
+
 class TodoProvider extends Notifier<List<Todo>>{
 
+  // List <Todo>
   @override
-  List<Todo> build() {
-   return [];
+  List<Todo>  build() {
+     return [];
   }
 
-   void addTodo(String todo){
-    final newTodo = Todo(
-        id: id,
-        isCompleted: false,
-        todo: todo
-    );
-
-   state = [...state, newTodo];
-
-   }
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class CounterProvider extends Notifier<int>{
-
-  @override
-   int  build() {
-    return 0;
-  }
-
-  void increment(){
-    state++;
-  }
-
-  void decrement(){
-     state--;
+  void addTodo(String todo){
+    state = [...state, Todo.build(todo)];
   }
 
 }
 
-
-
-final counterProvider = NotifierProvider<CounterProvider, int>(() => CounterProvider());
+final todoProvider = NotifierProvider<TodoProvider, List<Todo>>(() => TodoProvider());
