@@ -11,4 +11,9 @@ class Todo {
     return Todo(todo: todo, isCompleted: false, id: Uuid().v4());
   }
 
+
+  Todo copyWith ({String? todo, bool? isCompleted}){
+    return Todo(todo: todo ?? this.todo, isCompleted: isCompleted ?? this.isCompleted, id: this.id);
+  }
+
 }

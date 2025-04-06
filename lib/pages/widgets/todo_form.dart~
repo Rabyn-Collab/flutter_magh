@@ -13,7 +13,6 @@ class TodoForm extends StatefulWidget {
 
 class _TodoFormState extends State<TodoForm> {
   final _formKey = GlobalKey<FormBuilderState>();
-  final todoController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,6 @@ class _TodoFormState extends State<TodoForm> {
           child: Column(
             children: [
               FormBuilderTextField(
-                controller: todoController,
                   name: 'todo',
                 decoration: InputDecoration(
                   contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -35,7 +33,6 @@ class _TodoFormState extends State<TodoForm> {
                 onSubmitted: (val){
                     if(val!.isNotEmpty){
                       ref.read(todoProvider.notifier).addTodo(val);
-                      todoController.clear();
                     }
 
                 },
