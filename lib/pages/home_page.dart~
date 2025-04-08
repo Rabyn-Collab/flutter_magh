@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
                     onPressed: () {
                       ref.read(themeProvider.notifier).toggle();
                     }, icon: Icon(
-                   themeState == true ? Icons.light_mode_outlined: Icons.dark_mode_outlined));
+                   themeState ? Icons.light_mode_outlined: Icons.dark_mode_outlined));
               }
              )
         ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:magh/app_theme/app_colors.dart';
+import 'package:magh/providers/theme_provider.dart';
 import 'package:magh/routes/app_routes.dart';
 
 
@@ -17,20 +17,16 @@ runApp(ProviderScope(child: Home()));
 
 
 
-class Home extends StatelessWidget {
+class Home extends ConsumerWidget {
   const Home({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, ref) {
+    final state = ref.watch(themeProvider);
     return  MaterialApp.router(
       routerConfig: AppRoutes.routes,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: AppColors.backGroundColor
-        ),
-        scaffoldBackgroundColor: AppColors.backGroundColor
-      ),
+      theme: state ?  ThemeData.dark(): ThemeData.light(),
     );
   }
 }
