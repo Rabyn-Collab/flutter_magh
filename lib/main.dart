@@ -10,6 +10,7 @@ import 'package:magh/routes/app_routes.dart';
 
 
 
+
 void main () {
 
 runApp(ProviderScope(child: Home()));
