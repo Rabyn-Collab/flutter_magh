@@ -8,5 +8,9 @@ part 'recipe_controller.g.dart';
 
 @riverpod
 Future<List<Recipe>> getRecipes (Ref ref) async {
+  ref.keepAlive();
+  ref.onDispose((){
+    print('dispose');
+  });
   return RecipeRepository().getRecipes();
 }

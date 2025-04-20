@@ -17,6 +17,7 @@ class RecipeRepository {
 
    }catch (err){
      throw 'something went wrong';
+
    }
 
 
