@@ -1,6 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'client_provider.g.dart';
 
 
-class Todo{}
-
-final someProvider = Provider((ref) => Todo());
+@riverpod
+Dio client(Ref ref) {
+  return  Dio();
+}

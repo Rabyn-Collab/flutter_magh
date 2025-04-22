@@ -8,5 +8,9 @@ part 'product_controller.g.dart';
 
 @riverpod
 Future<List<Product>> getProducts (Ref ref) async {
-  return ProductRepository().getProducts();
+  return ref.read(productRepositoryProvider).getProducts();
 }
+
+
+
+

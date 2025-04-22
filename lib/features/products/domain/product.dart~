@@ -8,7 +8,9 @@ part 'product.g.dart';
 class Product with _$Product {
 
   const factory Product({
-
+  required int id,
+    required String title,
+    required String description
   }) = _Product;
 
   factory Product.fromJson(Map<String, dynamic> json) =>

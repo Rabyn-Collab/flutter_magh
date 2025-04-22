@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'product_controller.dart';
+part of 'client_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getProductsHash() => r'1bbea893e4823b89b4693a67b81e591b2950a600';
+String _$clientHash() => r'1cb4e8f327b0f74c190633e30d76517af81bb798';
 
-/// See also [getProducts].
-@ProviderFor(getProducts)
-final getProductsProvider = AutoDisposeFutureProvider<List<Product>>.internal(
-  getProducts,
-  name: r'getProductsProvider',
+/// See also [client].
+@ProviderFor(client)
+final clientProvider = AutoDisposeProvider<Dio>.internal(
+  client,
+  name: r'clientProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$getProductsHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$clientHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef GetProductsRef = AutoDisposeFutureProviderRef<List<Product>>;
+typedef ClientRef = AutoDisposeProviderRef<Dio>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

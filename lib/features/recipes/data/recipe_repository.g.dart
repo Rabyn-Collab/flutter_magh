@@ -1,26 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'product_controller.dart';
+part of 'recipe_repository.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getProductsHash() => r'1bbea893e4823b89b4693a67b81e591b2950a600';
+String _$recipeRepoHash() => r'dad144175cf113d2fdf3a7e0fde0b2150ba8d12d';
 
-/// See also [getProducts].
-@ProviderFor(getProducts)
-final getProductsProvider = AutoDisposeFutureProvider<List<Product>>.internal(
-  getProducts,
-  name: r'getProductsProvider',
+/// See also [recipeRepo].
+@ProviderFor(recipeRepo)
+final recipeRepoProvider = AutoDisposeProvider<RecipeRepository>.internal(
+  recipeRepo,
+  name: r'recipeRepoProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$getProductsHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$recipeRepoHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef GetProductsRef = AutoDisposeFutureProviderRef<List<Product>>;
+typedef RecipeRepoRef = AutoDisposeProviderRef<RecipeRepository>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

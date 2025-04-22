@@ -12,5 +12,5 @@ Future<List<Recipe>> getRecipes (Ref ref) async {
   ref.onDispose((){
     print('dispose');
   });
-  return RecipeRepository().getRecipes();
+  return ref.read(recipeRepoProvider).getRecipes();
 }
