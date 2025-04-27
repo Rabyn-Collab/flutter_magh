@@ -1,5 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:magh/features/home/presentation/home_page.dart';
+import 'package:magh/features/todos/presentation/todo_list.dart';
 
 class AppRoutes {
   static GoRouter get routes {
@@ -8,7 +8,7 @@ class AppRoutes {
       routes: [
         GoRoute(
           path: '/',
-          builder: (context,state) => HomePage()
+          builder: (context, state) => TodoList()
         ),
       ],
     );

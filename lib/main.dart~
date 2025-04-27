@@ -9,9 +9,27 @@ import 'package:magh/routes/app_routes.dart';
 /// provider , notifier provider, future provider, async notifier provider, stream provider
 
 
+Future<String> getData() async{
+  try{
+   await  Dio().get('https://jsonplaceholder.typicode.com/posts');
+   return 'success';
+  }catch(err){
+    throw 'message';
+  }
+
+}
+
+
+
 
 
 void main () async {
+
+  try{
+    await getData();
+  }catch (err){
+
+  }
 
 
 runApp(ProviderScope(child: Home()));
