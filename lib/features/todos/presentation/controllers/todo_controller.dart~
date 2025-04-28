@@ -20,9 +20,8 @@ class TodoController extends _$TodoController {
     state = AsyncLoading();
        try{
          final response = await ref.read(todosRepositoryProvider).removeTodos(id: id);
-         state = AsyncData([ ...state.value!.where((todo) => todo.id != id)]);
-         // ref.invalidateSelf();
-         // await future;
+         ref.invalidateSelf();
+         await future;
        }catch(err, stack){
         state = AsyncError(err, stack);
        }

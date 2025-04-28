@@ -8,6 +8,15 @@ class TodoList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    
+    ref.listen(todoControllerProvider, (prev, next){
+       next.maybeWhen(
+         data: (d) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('success'))),
+          error: (err, st){
+            SnackBar(content: Text('$err'));
+          }, orElse: () => null
+       );
+    });
     final todoState = ref.watch(todoControllerProvider);
 
     /*
@@ -55,8 +64,10 @@ class TodoList extends ConsumerWidget {
                    final todo = data[index];
                    return ListTile(
                      title: Text(todo.todo_task),
-                     trailing: IconButton(onPressed: (){
-                       ref.read(todoControllerProvider.notifier).removeTodo(todo.id);
+                     trailing:
+                     todoState.isReloading && todoIndex == index ? CircularProgressIndicator():
+                     IconButton(onPressed: (){
+                       ref.read(todoControllerProvider.notifier).removeTodo(todo.id, index);
                      }, icon: Icon(Icons.delete)),
                    );
                  },
