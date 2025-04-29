@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:magh/features/todos/presentation/controllers/todo_controller.dart';
+import 'package:magh/routes/route_enums.dart';
 
 
 class TodoList extends ConsumerWidget {
@@ -11,12 +13,16 @@ class TodoList extends ConsumerWidget {
     
     ref.listen(todoControllerProvider, (prev, next){
        next.maybeWhen(
-         data: (d) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('success'))),
-          error: (err, st){
-            SnackBar(content: Text('$err'));
-          }, orElse: () => null
+         data: (d) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+             duration: Duration(seconds: 1),
+             content: Text('success'))),
+          error: (err, st) =>ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              duration: Duration(seconds: 1),
+              content: Text('success')))
+          , orElse: () => null
        );
     });
+
     final todoState = ref.watch(todoControllerProvider);
 
     /*
@@ -44,17 +50,23 @@ class TodoList extends ConsumerWidget {
 
      */
 
-    print('${todoState} isLoading: ${todoState.isLoading}');
-    print('${todoState} isRefreshing: ${todoState.isRefreshing}');
-    print('${todoState} isReloading: ${todoState.isReloading}');
-    print('${todoState} hasValue: ${todoState.hasValue}');
-    print('${todoState} hasError: ${todoState.hasError}');
-    print('${todoState} value: ${todoState.value}');
-    print('${todoState} error: ${todoState.error}');
-
-    print('====================================================');
+    // print('${todoState} isLoading: ${todoState.isLoading}');
+    // print('${todoState} isRefreshing: ${todoState.isRefreshing}');
+    // print('${todoState} isReloading: ${todoState.isReloading}');
+    // print('${todoState} hasValue: ${todoState.hasValue}');
+    // print('${todoState} hasError: ${todoState.hasError}');
+    // print('${todoState} value: ${todoState.value}');
+    // print('${todoState} error: ${todoState.error}');
+    //
+    // print('====================================================');
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          ElevatedButton(onPressed: (){
+            context.pushNamed(AppRoute.todoForm.name);
+          }, child: Text('Add Todo'))
+        ],
+      ),
      body: Center(
        child: todoState.when(
          skipLoadingOnReload: true,

@@ -14,6 +14,19 @@ class TodoController extends _$TodoController {
   }
 
 
+  Future<void> addTodo(Map<String, dynamic> todoData) async{
+
+    state = AsyncLoading();
+    try{
+      final todo = await ref.read(todosRepositoryProvider).addTodos(todoData: todoData);
+      state = AsyncData([...state.value!, todo]);
+    }catch(err, stack){
+      state = AsyncError(err, stack);
+    }
+
+  }
+
+
 
   Future<void> removeTodo(String id, int index) async{
     todoIndex = index;
@@ -22,7 +35,7 @@ class TodoController extends _$TodoController {
          final response = await ref.read(todosRepositoryProvider).removeTodos(id: id);
          state = AsyncData([ ...state.value!.where((todo) => todo.id != id)]);
          // ref.invalidateSelf();
-         // await future;
+          //await future;
        }catch(err, stack){
         state = AsyncError(err, stack);
        }
