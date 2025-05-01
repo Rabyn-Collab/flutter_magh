@@ -20,6 +20,7 @@ class MealRepository {
       final response = await client.get(categoriesApi);
       return (response.data['categories'] as List).map((e) => CategoryData.fromJson(e)).toList();
     }on DioException catch(err){
+      print(err);
       throw ApiException(err).errorMessage;
     }
   }
