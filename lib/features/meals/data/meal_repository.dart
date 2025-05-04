@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magh/core/contants/apis.dart';
 import 'package:magh/core/exception/api_exception.dart';
 import 'package:magh/features/meals/domain/category.dart';
+import 'package:magh/features/meals/domain/meal.dart';
 import 'package:magh/features/shared/client_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -24,6 +25,22 @@ class MealRepository {
       throw ApiException(err).errorMessage;
     }
   }
+
+
+  Future<List<Meal>> getMealItems({required String category}) async {
+    try{
+      final response = await client.get(filterApi, queryParameters: {
+        'c': category
+      });
+      return (response.data['meals'] as List).map((e) => Meal.fromJson(e)).toList();
+    }on DioException catch(err){
+
+      throw ApiException(err).errorMessage;
+    }
+  }
+
+
+
 
 }
 
