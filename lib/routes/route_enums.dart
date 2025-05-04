@@ -4,6 +4,5 @@
 
 
 enum AppRoute{
-  home,
-  categoryItems,
+
 }
