@@ -1,9 +1,0 @@
-
-
-
-
-
-enum AppRoute{
-  home,
-  categoryItems,
-}

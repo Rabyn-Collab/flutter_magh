@@ -2,7 +2,9 @@
 
 
 
-
 enum AppRoute{
-
+  login,
+  signup,
+  books,
+  profile
 }

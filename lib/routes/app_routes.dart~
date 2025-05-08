@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magh/features/authentication/presentaion/login.dart';
 import 'package:magh/features/authentication/presentaion/sign_up.dart';
-import 'package:magh/main.dart';
 import 'package:magh/routes/route_enums.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -16,7 +15,7 @@ GoRouter  router(Ref ref) {
         GoRoute(
           path: '/',
           pageBuilder: (context, state){
-            return NoTransitionPage(child: SimpleStream());
+            return NoTransitionPage(child: Login());
           }
         ),
         GoRoute(
