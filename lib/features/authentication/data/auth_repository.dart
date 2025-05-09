@@ -19,7 +19,21 @@ class AuthRepository{
 
   Future<void> userSignUp ({required String username, required String email, required String password}) async{
     try{
-      await FirebaseInstances.fireAuth.createUserWithEmailAndPassword(email: email, password: password);
+      final credential = await FirebaseInstances.fireAuth.createUserWithEmailAndPassword(email: email, password: password);
+     await FirebaseInstances.userDb.doc(credential.user!.uid).set({
+       'username': username,
+       'email': email
+     });
+    }on FirebaseAuthException catch(err){
+      print(err.message);
+      print(err);
+      throw '${err.message}';
+    }
+  }
+
+  static Future<void> userSignOut () async{
+    try{
+      await FirebaseInstances.fireAuth.signOut();
     }on FirebaseAuthException catch(err){
       throw '${err.message}';
     }
