@@ -24,10 +24,8 @@ class SignUpController extends _$SignUpController {
 }) async{
     state = const AsyncLoading();
     final key = _key;
-  final  newState = await AsyncValue.guard(() => ref.read(authRepoProvider).userSignUp(
+    state  = await AsyncValue.guard(() => ref.read(authRepoProvider).userSignUp(
         username: username, email: email, password: password, image: image, phone: phone));
-    if (key == _key) {
-      state = newState;
-    }
+
   }
 }
