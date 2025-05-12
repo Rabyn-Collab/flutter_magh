@@ -6,21 +6,23 @@ part of 'user_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userStreamHash() => r'c793884239b898192ba2e5185c0cb77dfa6c2948';
+String _$userProfileStreamHash() => r'fa557b5b10c32af88f7d4962529fde283f1bf851';
 
-/// See also [userStream].
-@ProviderFor(userStream)
-final userStreamProvider = AutoDisposeStreamProvider<UserData>.internal(
-  userStream,
-  name: r'userStreamProvider',
+/// See also [userProfileStream].
+@ProviderFor(userProfileStream)
+final userProfileStreamProvider = AutoDisposeStreamProvider<UserData>.internal(
+  userProfileStream,
+  name: r'userProfileStreamProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$userStreamHash,
+      const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$userProfileStreamHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef UserStreamRef = AutoDisposeStreamProviderRef<UserData>;
+typedef UserProfileStreamRef = AutoDisposeStreamProviderRef<UserData>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magh/features/authentication/data/auth_repository.dart';
+import 'package:magh/features/home/presentation/widgets/drawer_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -10,26 +11,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text('Booking App')),
 
 
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(color: Colors.blue),
-              child: Text('Drawer Header'),
-            ),
-
-            ListTile(
-              onTap: (){
-                AuthRepository.userSignOut();
-              },
-              leading: Icon(Icons.exit_to_app),
-              title: const Text('Sign Out'),
-            ),
-
-          ],
-        ),
-      ),
+      drawer: DrawerWidget()
     );
   }
 }

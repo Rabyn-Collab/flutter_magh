@@ -4,7 +4,6 @@ import 'package:magh/features/authentication/presentaion/login.dart';
 import 'package:magh/features/authentication/presentaion/sign_up.dart';
 import 'package:magh/features/home/presentation/home_page.dart';
 import 'package:magh/features/shared/user_stream_provider.dart';
-import 'package:magh/main.dart';
 import 'package:magh/routes/route_enums.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

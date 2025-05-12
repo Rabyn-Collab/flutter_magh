@@ -17,7 +17,11 @@ GoRouter  router(Ref ref) {
   return  GoRouter(
     redirect: (context, state){
       final authenticated = userState.valueOrNull !=null;
-      return authenticated ? null : '/login';
+      final authenticating = (state.matchedLocation == '/login' || state.matchedLocation == '/signUp');
+      if(authenticated == false){
+        return authenticating ? null : '/login';
+      }
+      return null;
     },
       routes: [
         GoRoute(
