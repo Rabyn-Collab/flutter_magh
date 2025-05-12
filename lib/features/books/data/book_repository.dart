@@ -1,0 +1,37 @@
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:magh/features/shared/instances.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'book_repository.g.dart';
+
+class BookRepository {
+
+  Future<void> addBook ({required File file}) async{
+    try{
+      final response = await CloudinaryInstances.cloudinary.uploadFile(
+        CloudinaryFile.fromFile(file.path, resourceType: CloudinaryResourceType.Auto),
+      );
+
+      print(response.secureUrl);
+
+    } on FirebaseException catch(err){
+      throw '${err.message}';
+
+    }on CloudinaryException catch(err){
+      print(err);
+       throw '${err.message}';
+    }
+
+
+  }
+
+
+}
+
+@riverpod
+BookRepository bookRepo(Ref ref) {
+  return BookRepository();
+}
