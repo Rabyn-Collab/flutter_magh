@@ -15,7 +15,7 @@ class BookRepository {
     required XFile image,
     required String title,
     required String genre,
-    required int price,
+    required String price,
     required String publisher,
     required String author,
   }) async{
@@ -24,18 +24,11 @@ class BookRepository {
         CloudinaryFile.fromFile(file.path),
       );
       final response2 = await CloudinaryInstances.cloudinary.uploadFile(
-        CloudinaryFile.fromFile(image.path, resourceType: CloudinaryResourceType.Image),
+        CloudinaryFile.fromFile(image.path),
+        
       );
 
-         await FirebaseInstances.bookDb.add({
-           'title': title,
-           'genre': genre,
-           'price': price,
-           'publisher': publisher,
-           'author': author,
-           'image': response2.secureUrl,
-           'file': response1.secureUrl
-         });
+
 
     } on FirebaseException catch(err){
       throw '${err.message}';

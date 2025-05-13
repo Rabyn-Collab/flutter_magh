@@ -6,6 +6,7 @@ import 'package:cloudinary_public/cloudinary_public.dart';
 class FirebaseInstances{
   static final fireAuth = FirebaseAuth.instance;
   static final userDb = FirebaseFirestore.instance.collection('users');
+  static final bookDb = FirebaseFirestore.instance.collection('books');
 
 }
 
