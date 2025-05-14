@@ -6,7 +6,7 @@ part of 'file_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$fileControllerHash() => r'3569c73b729ade358b1d312189e56185d61f0920';
+String _$fileControllerHash() => r'1e570b783f515138dd0ddded393dec9397d18c4f';
 
 /// See also [FileController].
 @ProviderFor(FileController)

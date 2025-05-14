@@ -3,12 +3,22 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:magh/features/books/domain/book.dart';
 import 'package:magh/features/shared/instances.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'book_repository.g.dart';
 
 class BookRepository {
+
+  Stream<List<Book>> getBooks(){
+    return
+      FirebaseInstances.bookDb.snapshots().map((event) => event.docs.map((e) {
+        final map = e.data();
+        return Book.fromJson({...map, 'id': e.id});
+      }).toList());
+  }
+
 
   Future<void> addBook ({
     required File file,
@@ -18,6 +28,7 @@ class BookRepository {
     required int price,
     required String publisher,
     required String author,
+    required String description
   }) async{
     try{
       final response1 = await CloudinaryInstances.cloudinary.uploadFile(
@@ -34,7 +45,8 @@ class BookRepository {
            'publisher': publisher,
            'author': author,
            'image': response2.secureUrl,
-           'file': response1.secureUrl
+           'file': response1.secureUrl,
+           'description': description
          });
 
     } on FirebaseException catch(err){

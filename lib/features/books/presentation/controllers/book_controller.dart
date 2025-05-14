@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:magh/features/books/data/book_repository.dart';
+import 'package:magh/features/books/domain/book.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'book_controller.g.dart';
@@ -19,10 +21,17 @@ class BookController extends _$BookController {
     required int price,
     required String publisher,
     required String author,
+    required String description
 }) async{
     state = const AsyncLoading();
     state  = await AsyncValue.guard(() => ref.read(bookRepoProvider).
     addBook(file: file, image: image, title: title, genre: genre,
-        price: price, publisher: publisher, author: author));
+        price: price, publisher: publisher, author: author,description: description));
   }
+}
+
+
+@riverpod
+Stream<List<Book>>  bookStream(Ref ref) {
+  return ref.read(bookRepoProvider).getBooks();
 }

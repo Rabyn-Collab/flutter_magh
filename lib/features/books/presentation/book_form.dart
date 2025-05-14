@@ -93,6 +93,17 @@ class _BookFormState extends ConsumerState<BookForm> {
                   ]),
                 ),
                 AppSizes.gapH16,
+                FormBuilderTextField(
+                  name: 'description',
+                  keyboardType: TextInputType.text,
+                  decoration: InputDecoration(
+                      hintText: 'Description'
+                  ),
+                  validator: FormBuilderValidators.compose( [
+                    FormBuilderValidators.required()
+                  ]),
+                ),
+                AppSizes.gapH16,
                 FormBuilderDropdown(
                   name: 'genre',
                   hint: Text('Genre'),
@@ -154,7 +165,8 @@ class _BookFormState extends ConsumerState<BookForm> {
                           genre: map['genre'],
                           price: int.parse(map['price']),
                           publisher:  map['publisher'],
-                          author: map['author']
+                          author: map['author'],
+                        description: map['description']
                       );
                     }else{
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();

@@ -2,8 +2,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magh/features/authentication/presentaion/login.dart';
 import 'package:magh/features/authentication/presentaion/sign_up.dart';
+import 'package:magh/features/books/domain/book.dart';
+import 'package:magh/features/books/presentation/book_detail.dart';
 import 'package:magh/features/books/presentation/book_form.dart';
 import 'package:magh/features/home/presentation/home_page.dart';
+import 'package:magh/features/pdf/pdf_page.dart';
 import 'package:magh/features/shared/user_stream_provider.dart';
 import 'package:magh/routes/route_enums.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -28,7 +31,25 @@ GoRouter  router(Ref ref) {
           path: '/',
           pageBuilder: (context, state){
             return NoTransitionPage(child: HomePage());
-          }
+          },
+          routes: [
+            GoRoute(
+                path: 'book-detail',
+              name: AppRoute.bookDetail.name,
+              pageBuilder: (context, state){
+                final book = state.extra as Book;
+                return NoTransitionPage(child: BookDetail(book: book));
+              },
+            ),
+            GoRoute(
+              path: 'pdf',
+              name: AppRoute.pdf.name,
+              pageBuilder: (context, state){
+                final bookUrl = state.extra as String;
+                return NoTransitionPage(child: PdfPage(pdfUrl:bookUrl));
+              },
+            )
+          ]
         ),
 
         GoRoute(

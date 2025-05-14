@@ -8,6 +8,5 @@ enum AppRoute{
   books,
   profile,
   bookForm,
-  bookDetail,
-  pdf
+  bookDetail
 }

@@ -6,7 +6,23 @@ part of 'book_controller.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$bookControllerHash() => r'1b6e7decff8e4986706fc8a604dd3d8a6c989581';
+String _$bookStreamHash() => r'f8e5a78d1211a9e68fef801e2ef655c7c9592bc6';
+
+/// See also [bookStream].
+@ProviderFor(bookStream)
+final bookStreamProvider = AutoDisposeStreamProvider<List<Book>>.internal(
+  bookStream,
+  name: r'bookStreamProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$bookStreamHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef BookStreamRef = AutoDisposeStreamProviderRef<List<Book>>;
+String _$bookControllerHash() => r'27003d1070e6cf312c4a81708143b473626d6d9d';
 
 /// See also [BookController].
 @ProviderFor(BookController)
