@@ -33,7 +33,8 @@ class AuthRepository{
        'username': username,
        'email': email,
         'phone': phone,
-        'image': response.secureUrl
+        'image': response.secureUrl,
+        'role': 'user'
      });
     }on FirebaseAuthException catch(err){
       print(err.message);

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:magh/features/authentication/data/auth_repository.dart';
 import 'package:magh/features/home/presentation/controllers/user_controller.dart';
+import 'package:magh/routes/route_enums.dart';
 
 class DrawerWidget extends ConsumerWidget {
   const DrawerWidget({super.key});
@@ -28,6 +30,13 @@ class DrawerWidget extends ConsumerWidget {
                       Text(user.email),
                     ],
                   ),
+                ),
+                if(user.role == 'admin') ListTile(
+                  onTap: (){
+                    context.pushNamed(AppRoute.admin.name);
+                  },
+                  leading: Icon(Icons.admin_panel_settings),
+                  title: const Text('Admin Panel'),
                 ),
 
                 ListTile(

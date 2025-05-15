@@ -15,6 +15,7 @@ Stream<UserData> userProfileStream (Ref ref) {
     return UserData(
         username: map['username'],
         email: map['email'],
+        role: map['role'],
         image: map['image'], phone: map['phone'], uid: event.id);
   });
 }

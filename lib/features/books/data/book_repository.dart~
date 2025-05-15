@@ -15,7 +15,7 @@ class BookRepository {
     return
       FirebaseInstances.bookDb.snapshots().map((event) => event.docs.map((e) {
         final map = e.data();
-        return Book.fromJson({...map});
+        return Book.fromJson({...map, 'id': e.id});
       }).toList());
   }
 
@@ -61,6 +61,71 @@ class BookRepository {
 
 
   }
+
+
+
+  Future<void> updateBook ({
+    required File? file,
+    required XFile? image,
+    required String? oldImageUrl,
+    required String title,
+    required String genre,
+    required int price,
+    required String publisher,
+    required String author,
+    required String description,
+    required String bookId,
+  }) async{
+    try{
+      if(image != null){
+        await CloudinaryInstances.delCloudinary.destroy(
+          'public_id',
+          url: oldImageUrl,
+          invalidate: true,
+        );
+         final response1 = await CloudinaryInstances.cloudinary.uploadFile(
+           CloudinaryFile.fromFile(image.path, resourceType: CloudinaryResourceType.Image),
+         );
+      }
+      if(file != null){
+        await CloudinaryInstances.delCloudinary.destroy(
+          'public_id',
+          url: oldImageUrl,
+          invalidate: true,
+        );
+        final response2 = await CloudinaryInstances.cloudinary.uploadFile(
+          CloudinaryFile.fromFile(file.path),
+        );
+      }
+      // final response1 = await CloudinaryInstances.cloudinary.uploadFile(
+      //   CloudinaryFile.fromFile(file.path),
+      // );
+
+
+      // await FirebaseInstances.bookDb.add({
+      //   'title': title,
+      //   'genre': genre,
+      //   'price': price,
+      //   'publisher': publisher,
+      //   'author': author,
+      //   'image': response2.secureUrl,
+      //   'file': response1.secureUrl,
+      //   'description': description
+      // });
+
+    } on FirebaseException catch(err){
+      throw '${err.message}';
+
+    }on CloudinaryException catch(err){
+      print(err);
+      throw '${err.message}';
+    }catch(err){
+      print(err);
+    }
+
+
+  }
+
 
 
 }
