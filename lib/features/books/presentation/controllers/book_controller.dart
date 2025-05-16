@@ -28,6 +28,31 @@ class BookController extends _$BookController {
     addBook(file: file, image: image, title: title, genre: genre,
         price: price, publisher: publisher, author: author,description: description));
   }
+
+  Future<void> updateBook ({
+    required File? file,
+    required XFile? image,
+    required String? imageUrl,
+    required String? fileUrl,
+    required String title,
+    required String genre,
+    required int price,
+    required String publisher,
+    required String author,
+    required String description,
+    required String bookId,
+  }) async{
+    state = const AsyncLoading();
+    state  = await AsyncValue.guard(() => ref.read(bookRepoProvider).
+    updateBook(file: file, image: image, title: title, genre: genre,
+        fileUrl: fileUrl,
+        imageUrl: imageUrl,
+        price: price, publisher: publisher, author: author,description: description,bookId: bookId));
+
+  }
+
+
+
 }
 
 

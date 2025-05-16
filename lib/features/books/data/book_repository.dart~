@@ -65,9 +65,10 @@ class BookRepository {
 
 
   Future<void> updateBook ({
-    required File? file,
-    required XFile? image,
-    required String? oldImageUrl,
+     File? file,
+     XFile? image,
+     String? imageUrl,
+     String? fileUrl,
     required String title,
     required String genre,
     required int price,
@@ -77,41 +78,43 @@ class BookRepository {
     required String bookId,
   }) async{
     try{
+
+      CloudinaryResponse? response1;
+      CloudinaryResponse? response2;
       if(image != null){
+        print('hello');
         await CloudinaryInstances.delCloudinary.destroy(
           'public_id',
-          url: oldImageUrl,
+          url: imageUrl,
           invalidate: true,
         );
-         final response1 = await CloudinaryInstances.cloudinary.uploadFile(
+          response1 = await CloudinaryInstances.cloudinary.uploadFile(
            CloudinaryFile.fromFile(image.path, resourceType: CloudinaryResourceType.Image),
          );
       }
       if(file != null){
         await CloudinaryInstances.delCloudinary.destroy(
           'public_id',
-          url: oldImageUrl,
-          invalidate: true,
+          url: fileUrl,
+         
+          invalidate: false,
         );
-        final response2 = await CloudinaryInstances.cloudinary.uploadFile(
+         response2 = await CloudinaryInstances.cloudinary.uploadFile(
           CloudinaryFile.fromFile(file.path),
         );
       }
-      // final response1 = await CloudinaryInstances.cloudinary.uploadFile(
-      //   CloudinaryFile.fromFile(file.path),
-      // );
 
 
-      // await FirebaseInstances.bookDb.add({
-      //   'title': title,
-      //   'genre': genre,
-      //   'price': price,
-      //   'publisher': publisher,
-      //   'author': author,
-      //   'image': response2.secureUrl,
-      //   'file': response1.secureUrl,
-      //   'description': description
-      // });
+      await FirebaseInstances.bookDb.doc(bookId).update({
+        'title': title,
+        'genre': genre,
+        'price': price,
+        'publisher': publisher,
+        'author': author,
+        'image': response1?.secureUrl ?? imageUrl,
+        'file': response2?.secureUrl ?? fileUrl,
+        'description': description
+      });
 
     } on FirebaseException catch(err){
       throw '${err.message}';

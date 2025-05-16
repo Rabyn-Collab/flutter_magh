@@ -6,7 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:magh/features/books/domain/book.dart';
 import 'package:magh/features/shared/instances.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-
+import 'package:cloudinary/cloudinary.dart' as cloud;
 part 'book_repository.g.dart';
 
 class BookRepository {
@@ -65,10 +65,10 @@ class BookRepository {
 
 
   Future<void> updateBook ({
-    required File? file,
-    required XFile? image,
-    required String? imageUrl,
-    required String? fileUrl,
+     File? file,
+     XFile? image,
+     String? imageUrl,
+     String? fileUrl,
     required String title,
     required String genre,
     required int price,
@@ -82,6 +82,7 @@ class BookRepository {
       CloudinaryResponse? response1;
       CloudinaryResponse? response2;
       if(image != null){
+        print('hello');
         await CloudinaryInstances.delCloudinary.destroy(
           'public_id',
           url: imageUrl,
@@ -95,7 +96,8 @@ class BookRepository {
         await CloudinaryInstances.delCloudinary.destroy(
           'public_id',
           url: fileUrl,
-          invalidate: true,
+         resourceType: cloud.CloudinaryResourceType.image,
+          invalidate: false,
         );
          response2 = await CloudinaryInstances.cloudinary.uploadFile(
           CloudinaryFile.fromFile(file.path),

@@ -156,7 +156,7 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
                             border: Border.all(color: Colors.black)
                         ),
                         height: 50,
-                        child: Center(child: Text(file == null ? 'Select File' : file.path)),
+                        child: Center(child: Text(file == null ? widget.book.file : file.path)),
                       )
                   ),
                   AppSizes.gapH16,
@@ -165,24 +165,19 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
                   ElevatedButton(
                       onPressed: bookState.isLoading ? null: (){
                         if(_formKey.currentState!.saveAndValidate(focusOnInvalid: false)){
-                          final map = _formKey.currentState!.value;
-                          if(file != null && image != null){
-                            ref.read(bookControllerProvider.notifier).addBook(
-                                file: file,
-                                image: image,
-                                title:map['title'],
-                                genre: map['genre'],
-                                price: int.parse(map['price']),
-                                publisher:  map['publisher'],
-                                author: map['author'],
-                                description: map['description']
-                            );
-                          }else{
-                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                duration: Duration(seconds: 1),
-                                content: Text('Please Select an Image And File')));
-                          }
+                          ref.read(bookControllerProvider.notifier).updateBook(
+                              bookId: widget.book.id,
+                              file: file,
+                              image: image,
+                              title: _formKey.currentState!.value['title'],
+                              genre: _formKey.currentState!.value['genre'],
+                              price: int.parse(_formKey.currentState!.value['price']),
+                              publisher:  _formKey.currentState!.value['publisher'],
+                              author: _formKey.currentState!.value['author'],
+                              description: _formKey.currentState!.value['description'],
+                              imageUrl:widget.book.image,
+                              fileUrl: widget.book.file
+                          );
                         }else{
                           ref.read(validateModeControllerProvider(id: 3).notifier).change();
                         }
