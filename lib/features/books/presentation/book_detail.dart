@@ -21,7 +21,7 @@ class BookDetail extends StatelessWidget {
             children: [
               Expanded(
                   flex: 2,
-                  child: CachedNetworkImage(imageUrl: book.image)),
+                  child: CachedNetworkImage(imageUrl: book.imageUrl)),
               Expanded(child: Column(
                 children: [
                   Text(book.title),
@@ -34,7 +34,7 @@ class BookDetail extends StatelessWidget {
           Column(
             children: [
               ElevatedButton(onPressed: (){
-                context.pushNamed(AppRoute.pdf.name, extra: book.file);
+                context.pushNamed(AppRoute.pdf.name, extra: book.fileUrl);
 
               }, child: Text('Read Book')),
             ],

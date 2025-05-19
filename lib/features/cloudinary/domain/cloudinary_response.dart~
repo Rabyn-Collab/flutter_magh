@@ -1,0 +1,15 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+part 'cloudinary_response.g.dart';
+part 'cloudinary_response.freezed.dart';
+
+@freezed
+class CloudinaryResponse with _$CloudinaryResponse {
+
+  const factory CloudinaryResponse({
+    required String url,
+}) = _CloudinaryResponse;
+
+  factory CloudinaryResponse.fromJson(Map<String, dynamic> json) =>
+      _$CloudinaryResponseFromJson(json);
+}

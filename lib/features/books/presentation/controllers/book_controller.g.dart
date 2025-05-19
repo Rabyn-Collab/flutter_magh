@@ -22,7 +22,7 @@ final bookStreamProvider = AutoDisposeStreamProvider<List<Book>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef BookStreamRef = AutoDisposeStreamProviderRef<List<Book>>;
-String _$bookControllerHash() => r'27003d1070e6cf312c4a81708143b473626d6d9d';
+String _$bookControllerHash() => r'03ad901dc14f1d264195b7b600a7e1875bffa339';
 
 /// See also [BookController].
 @ProviderFor(BookController)

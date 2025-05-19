@@ -142,7 +142,7 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
                             border: Border.all(color: Colors.black)
                         ),
                         height: 100,
-                        child: image == null ? CachedNetworkImage(imageUrl: widget.book.image): Image.file(File(image.path)),
+                        child: image == null ? CachedNetworkImage(imageUrl: widget.book.imageUrl): Image.file(File(image.path)),
                       )
                   ),
                   AppSizes.gapH16,
@@ -156,7 +156,7 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
                             border: Border.all(color: Colors.black)
                         ),
                         height: 50,
-                        child: Center(child: Text(file == null ? widget.book.file : file.path)),
+                        child: Center(child: Text(file == null ? widget.book.fileUrl : file.path)),
                       )
                   ),
                   AppSizes.gapH16,
@@ -175,8 +175,8 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
                               publisher:  _formKey.currentState!.value['publisher'],
                               author: _formKey.currentState!.value['author'],
                               description: _formKey.currentState!.value['description'],
-                              imageUrl:widget.book.image,
-                              fileUrl: widget.book.file
+                              imageUrl:widget.book.imageUrl,
+                              fileUrl: widget.book.fileUrl
                           );
                         }else{
                           ref.read(validateModeControllerProvider(id: 3).notifier).change();

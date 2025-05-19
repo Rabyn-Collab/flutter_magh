@@ -1,13 +1,13 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:magh/features/books/domain/book.dart';
+import 'package:magh/features/cloudinary/data/cloudinary_repository.dart';
 import 'package:magh/features/shared/instances.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:cloudinary/cloudinary.dart' as cloud;
 part 'book_repository.g.dart';
+
 
 class BookRepository {
 
@@ -31,12 +31,8 @@ class BookRepository {
     required String description
   }) async{
     try{
-      final response1 = await CloudinaryInstances.cloudinary.uploadFile(
-        CloudinaryFile.fromFile(file.path),
-      );
-      final response2 = await CloudinaryInstances.cloudinary.uploadFile(
-        CloudinaryFile.fromFile(image.path, resourceType: CloudinaryResourceType.Image),
-      );
+      final response1 = await CloudinaryRepository.uploadImage(file);
+      final response2 = await CloudinaryRepository.uploadImage(File(image.path));
 
          await FirebaseInstances.bookDb.add({
            'title': title,
@@ -44,19 +40,18 @@ class BookRepository {
            'price': price,
            'publisher': publisher,
            'author': author,
-           'image': response2.secureUrl,
-           'file': response1.secureUrl,
+           'imageUrl': response2.secure_url,
+           'fileUrl': response1.secure_url,
+           'imageId': response2.public_id,
+           'fileId': response1.public_id,
            'description': description
          });
 
     } on FirebaseException catch(err){
       throw '${err.message}';
 
-    }on CloudinaryException catch(err){
-      print(err);
-       throw '${err.message}';
     }catch(err){
-      print(err);
+      throw '$err';
     }
 
 
@@ -77,54 +72,54 @@ class BookRepository {
     required String description,
     required String bookId,
   }) async{
-    try{
-
-      CloudinaryResponse? response1;
-      CloudinaryResponse? response2;
-      if(image != null){
-        print('hello');
-        await CloudinaryInstances.delCloudinary.destroy(
-          'public_id',
-          url: imageUrl,
-          invalidate: true,
-        );
-          response1 = await CloudinaryInstances.cloudinary.uploadFile(
-           CloudinaryFile.fromFile(image.path, resourceType: CloudinaryResourceType.Image),
-         );
-      }
-      if(file != null){
-        await CloudinaryInstances.delCloudinary.destroy(
-          'public_id',
-          url: fileUrl,
-         resourceType: cloud.CloudinaryResourceType.image,
-          invalidate: false,
-        );
-         response2 = await CloudinaryInstances.cloudinary.uploadFile(
-          CloudinaryFile.fromFile(file.path),
-        );
-      }
-
-
-      await FirebaseInstances.bookDb.doc(bookId).update({
-        'title': title,
-        'genre': genre,
-        'price': price,
-        'publisher': publisher,
-        'author': author,
-        'image': response1?.secureUrl ?? imageUrl,
-        'file': response2?.secureUrl ?? fileUrl,
-        'description': description
-      });
-
-    } on FirebaseException catch(err){
-      throw '${err.message}';
-
-    }on CloudinaryException catch(err){
-      print(err);
-      throw '${err.message}';
-    }catch(err){
-      print(err);
-    }
+    // try{
+    //
+    //   CloudinaryResponse? response1;
+    //   CloudinaryResponse? response2;
+    //   if(image != null){
+    //     print('hello');
+    //     await CloudinaryInstances.delCloudinary.destroy(
+    //       'public_id',
+    //       url: imageUrl,
+    //       invalidate: true,
+    //     );
+    //       response1 = await CloudinaryInstances.cloudinary.uploadFile(
+    //        CloudinaryFile.fromFile(image.path, resourceType: CloudinaryResourceType.Image),
+    //      );
+    //   }
+    //   if(file != null){
+    //     await CloudinaryInstances.delCloudinary.destroy(
+    //       'public_id',
+    //       url: fileUrl,
+    //      resourceType: cloud.CloudinaryResourceType.image,
+    //       invalidate: false,
+    //     );
+    //      response2 = await CloudinaryInstances.cloudinary.uploadFile(
+    //       CloudinaryFile.fromFile(file.path),
+    //     );
+    //   }
+    //
+    //
+    //   await FirebaseInstances.bookDb.doc(bookId).update({
+    //     'title': title,
+    //     'genre': genre,
+    //     'price': price,
+    //     'publisher': publisher,
+    //     'author': author,
+    //     'image': response1?.secureUrl ?? imageUrl,
+    //     'file': response2?.secureUrl ?? fileUrl,
+    //     'description': description
+    //   });
+    //
+    // } on FirebaseException catch(err){
+    //   throw '${err.message}';
+    //
+    // }on CloudinaryException catch(err){
+    //   print(err);
+    //   throw '${err.message}';
+    // }catch(err){
+    //   print(err);
+    // }
 
 
   }

@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloudinary/cloudinary.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloudinary_public/cloudinary_public.dart';
 
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseInstances{
   static final fireAuth = FirebaseAuth.instance;
@@ -11,10 +9,3 @@ class FirebaseInstances{
 
 }
 
-
-class CloudinaryInstances{
-  static final cloudinary = CloudinaryPublic('dx5eyrlaf', 'sample_pics', cache: false);
-  static final delCloudinary = Cloudinary.unsignedConfig(
-    cloudName: 'dx5eyrlaf',
-  );
-}
