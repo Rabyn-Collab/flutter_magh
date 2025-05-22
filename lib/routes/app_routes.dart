@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magh/features/admin/presentation/admin_dashboard.dart';
 import 'package:magh/features/admin/presentation/book_edit_form.dart';
+import 'package:magh/features/admin/presentation/user_dashboard.dart';
 import 'package:magh/features/authentication/presentaion/login.dart';
 import 'package:magh/features/authentication/presentaion/sign_up.dart';
 import 'package:magh/features/books/domain/book.dart';
@@ -59,6 +60,13 @@ GoRouter  router(Ref ref) {
             name: AppRoute.admin.name,
             pageBuilder: (context, state){
               return NoTransitionPage(child: AdminDashboard());
+            }
+        ),
+        GoRoute(
+            path: '/users',
+            name: AppRoute.users.name,
+            pageBuilder: (context, state){
+              return NoTransitionPage(child: UserDashboard());
             }
         ),
 

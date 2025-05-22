@@ -21,45 +21,56 @@ class AdminDashboard extends ConsumerWidget {
       ),
       body: bookState.when(
           data: (data){
-            return ListView.separated(
-                itemBuilder: (context,index){
-                  final book = data[index];
-                  return ListTile(
-                    onTap: (){
-                      context.pushNamed(AppRoute.bookDetail.name, extra: book);
-                    },
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(book.imageUrl),
-                    ),
-                    title: Text(book.title),
-                    trailing: SizedBox(
-                      width: 100,
-                      child: Row(
-                        children: [
-                          IconButton(onPressed: (){
-                            context.pushNamed(AppRoute.bookEdit.name, extra: book);
-                          }, icon: const Icon(Icons.edit)),
-                          IconButton(onPressed: (){
-                            showDialog(context: context, builder:(context) {
-                              return AlertDialog(
-                                title: const Text('Delete Book'),
-                                content: const Text('Are you sure you want to delete this book?'),
-                                actions: [
-                                  TextButton(onPressed: () {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Text('Total Books:-${data.length}'),
+                ),
+                Expanded(
+                  child: ListView.separated(
+                      itemBuilder: (context,index){
+                        final book = data[index];
+                        return ListTile(
+                          onTap: (){
+                            context.pushNamed(AppRoute.bookDetail.name, extra: book);
+                          },
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(book.imageUrl),
+                          ),
+                          title: Text(book.title),
+                          trailing: SizedBox(
+                            width: 100,
+                            child: Row(
+                              children: [
+                                IconButton(onPressed: (){
+                                  context.pushNamed(AppRoute.bookEdit.name, extra: book);
+                                }, icon: const Icon(Icons.edit)),
+                                IconButton(onPressed: (){
+                                  showDialog(context: context, builder:(context) {
+                                    return AlertDialog(
+                                      title: const Text('Delete Book'),
+                                      content: const Text('Are you sure you want to delete this book?'),
+                                      actions: [
+                                        TextButton(onPressed: () {
 
-                                  }, child: const Text('Cancel')),
-                                  TextButton(onPressed: () => Navigator.pop(context), child: const Text('Delete'))
-                                ]
-                              );
-                            });
-                          }, icon: const Icon(Icons.delete))
-                        ],
-                      ),
-                    ),
-                  );
-                },
-                separatorBuilder: (context,index) => Divider(),
-                itemCount: data.length
+                                        }, child: const Text('Cancel')),
+                                        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Delete'))
+                                      ]
+                                    );
+                                  });
+                                }, icon: const Icon(Icons.delete))
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context,index) => Divider(),
+                      itemCount: data.length
+                  ),
+                ),
+              ],
             );
           },
           error: (err, st) => Text(err.toString()),

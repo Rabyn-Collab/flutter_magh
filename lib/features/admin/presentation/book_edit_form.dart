@@ -176,7 +176,9 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
                               author: _formKey.currentState!.value['author'],
                               description: _formKey.currentState!.value['description'],
                               imageUrl:widget.book.imageUrl,
-                              fileUrl: widget.book.fileUrl
+                              fileUrl: widget.book.fileUrl,
+                              imageId: widget.book.imageId,
+                              fileId: widget.book.fileId
                           );
                         }else{
                           ref.read(validateModeControllerProvider(id: 3).notifier).change();

@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:magh/features/shared/instances.dart';
 import 'package:magh/routes/route_enums.dart';
 
 import 'controllers/book_controller.dart';
@@ -11,6 +12,7 @@ class BookList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final userId = FirebaseInstances.fireAuth.currentUser!.uid;
     final bookState = ref.watch(bookStreamProvider);
     return bookState.when(data: (data){
       return ListView.builder(
@@ -25,6 +27,11 @@ class BookList extends ConsumerWidget {
               child: Card(
                 child: Column(
                   children: [
+                  if(userId == book.userId)  Align(
+                        alignment: Alignment.topRight,
+                        child: IconButton(onPressed: (){
+                          context.pushNamed(AppRoute.bookEdit.name, extra: book);
+                        }, icon: Icon(Icons.edit))),
                     CachedNetworkImage(
                         height: 200,
                         width: double.infinity,
@@ -33,6 +40,7 @@ class BookList extends ConsumerWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
+
                         children: [
                           Text(book.title),
                           Text('Author:-${book.author}'),

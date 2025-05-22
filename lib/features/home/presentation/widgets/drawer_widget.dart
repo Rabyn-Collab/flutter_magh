@@ -38,6 +38,14 @@ class DrawerWidget extends ConsumerWidget {
                   leading: Icon(Icons.admin_panel_settings),
                   title: const Text('Admin Panel'),
                 ),
+                if(user.role == 'admin') ListTile(
+                  onTap: (){
+                    context.pushNamed(AppRoute.users.name);
+                  },
+                  leading: Icon(Icons.supervised_user_circle_rounded),
+                  title: const Text('User Panel'),
+                ),
+
 
                 ListTile(
                   onTap: (){

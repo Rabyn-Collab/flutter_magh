@@ -29,7 +29,7 @@ class AuthRepository{
     try{
       final credential = await FirebaseInstances.fireAuth.createUserWithEmailAndPassword(email: email, password: password);
 
-      CloudinaryResponse response = await CloudinaryRepository.uploadImage(File(image.path));
+      CloudinaryResponse response = await CloudinaryRepository.uploadImageOrFile(File(image.path));
       await FirebaseInstances.userDb.doc(credential.user!.uid).set({
        'username': username,
        'email': email,

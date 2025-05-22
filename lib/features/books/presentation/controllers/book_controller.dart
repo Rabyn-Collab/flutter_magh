@@ -34,6 +34,8 @@ class BookController extends _$BookController {
     required XFile? image,
     required String? imageUrl,
     required String? fileUrl,
+    String? imageId,
+    String? fileId,
     required String title,
     required String genre,
     required int price,
@@ -47,6 +49,8 @@ class BookController extends _$BookController {
     updateBook(file: file, image: image, title: title, genre: genre,
         fileUrl: fileUrl,
         imageUrl: imageUrl,
+        fileId: fileId,
+        imageId: imageId,
         price: price, publisher: publisher, author: author,description: description,bookId: bookId));
 
   }
