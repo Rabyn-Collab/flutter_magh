@@ -15,6 +15,7 @@ Stream<List<UserData>> usersStream (Ref ref) {
         username: map['username'],
         email: map['email'],
         role: map['role'],
+        public_id: map['public_id'] ,
         image: map['image'], phone: map['phone'], uid: e.id);
   }).toList());
 

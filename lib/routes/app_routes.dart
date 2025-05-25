@@ -3,11 +3,13 @@ import 'package:go_router/go_router.dart';
 import 'package:magh/features/admin/presentation/admin_dashboard.dart';
 import 'package:magh/features/admin/presentation/book_edit_form.dart';
 import 'package:magh/features/admin/presentation/user_dashboard.dart';
+import 'package:magh/features/admin/presentation/user_edit_form.dart';
 import 'package:magh/features/authentication/presentaion/login.dart';
 import 'package:magh/features/authentication/presentaion/sign_up.dart';
 import 'package:magh/features/books/domain/book.dart';
 import 'package:magh/features/books/presentation/book_detail.dart';
 import 'package:magh/features/books/presentation/book_form.dart';
+import 'package:magh/features/home/domain/user_data.dart';
 import 'package:magh/features/home/presentation/home_page.dart';
 import 'package:magh/features/pdf/pdf_page.dart';
 import 'package:magh/features/shared/user_stream_provider.dart';
@@ -67,6 +69,14 @@ GoRouter  router(Ref ref) {
             name: AppRoute.users.name,
             pageBuilder: (context, state){
               return NoTransitionPage(child: UserDashboard());
+            }
+        ),
+        GoRoute(
+            path: '/user-edit',
+            name: AppRoute.userEdit.name,
+            pageBuilder: (context, state){
+              final user = state.extra as UserData;
+              return NoTransitionPage(child: UserEditForm(user: user));
             }
         ),
 

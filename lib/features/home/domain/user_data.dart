@@ -11,7 +11,8 @@ class UserData with _$UserData {
     required String image,
     required int phone,
     required String uid,
-    required  String role
+    required  String role,
+    required String public_id
   }) = _UserData;
 
 

@@ -12,5 +12,6 @@ enum AppRoute{
   bookDetail,
   pdf,
   admin,
-  users
+  users,
+  userEdit
 }

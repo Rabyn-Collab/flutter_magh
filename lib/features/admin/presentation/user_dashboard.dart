@@ -26,7 +26,7 @@ class UserDashboard extends ConsumerWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: Text('Total Books:-${data.length}'),
+                    child: Text('Total Users:-${data.length}'),
                   ),
                   Expanded(
                     child: ListView.separated(
@@ -45,18 +45,18 @@ class UserDashboard extends ConsumerWidget {
                               child: Row(
                                 children: [
                                   IconButton(onPressed: (){
-                                   // context.pushNamed(AppRoute.bookEdit.name, extra: book);
+                                    context.pushNamed(AppRoute.userEdit.name, extra:user);
                                   }, icon: const Icon(Icons.edit)),
                                   IconButton(onPressed: (){
                                     showDialog(context: context, builder:(context) {
                                       return AlertDialog(
-                                          title: const Text('Delete Book'),
-                                          content: const Text('Are you sure you want to delete this book?'),
+                                          title: const Text('Remove User'),
+                                          content: const Text('Are you sure you want to Remove this user ?'),
                                           actions: [
                                             TextButton(onPressed: () {
 
                                             }, child: const Text('Cancel')),
-                                            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Delete'))
+                                            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Remove'))
                                           ]
                                       );
                                     });
