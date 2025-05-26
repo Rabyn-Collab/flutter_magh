@@ -40,11 +40,10 @@ class UserRepository {
 
 
  static Future<void> removeUser({
-
     required String userId
   }) async {
     try{
-      await FirebaseInstances.userDb.doc(userId).delete();
+      await CloudinaryRepository.removeUser(userId);
     }on FirebaseException catch (err){
       throw '${err.message}';
     }

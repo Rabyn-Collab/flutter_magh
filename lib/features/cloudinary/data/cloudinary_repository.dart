@@ -7,7 +7,7 @@ import 'package:magh/features/cloudinary/domain/cloudinary_response.dart';
 
 class CloudinaryRepository {
  static final Dio dio = Dio();
-static const baseApi = 'https://cloudinary-api-kxog.onrender.com/api';
+static const baseApi = 'https://cloudy-api.onrender.com/api';
 
   static Future<CloudinaryResponse> uploadImageOrFile(File file)  async{
      try{
@@ -20,6 +20,7 @@ static const baseApi = 'https://cloudinary-api-kxog.onrender.com/api';
        );
        return CloudinaryResponse.fromJson(response.data);
      } catch (err){
+       print(err);
 
        throw '$err';
      }
@@ -48,6 +49,16 @@ static const baseApi = 'https://cloudinary-api-kxog.onrender.com/api';
      throw '$err';
    }
  }
+
+
+  static Future<void> removeUser(String uid)  async{
+    try{
+      await dio.delete('$baseApi/users/$uid');
+    } catch (err){
+      throw '$err';
+    }
+  }
+
 
 
 

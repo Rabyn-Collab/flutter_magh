@@ -4,12 +4,29 @@ import 'package:go_router/go_router.dart';
 import 'package:magh/features/admin/presentation/controllers/user_list_controller.dart';
 import 'package:magh/routes/route_enums.dart';
 
+import 'controllers/user_controller.dart';
+
 class UserDashboard extends ConsumerWidget {
   const UserDashboard({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    ref.listen(userControllerProvider, (previous, next) {
+      next.maybeWhen(
+        data: (data) {
+          context.pop();
+        },
+        error: (err, st) =>
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                duration: const Duration(seconds: 1),
+                content: Text(err.toString()))),
+        orElse: () => null,
+      );
+    });
+
     final userState = ref.watch(usersStreamProvider);
+    final userController = ref.watch(userControllerProvider);
     return Scaffold(
         appBar: AppBar(
           title: const Text('Users Dashboard'),
@@ -54,9 +71,11 @@ class UserDashboard extends ConsumerWidget {
                                           content: const Text('Are you sure you want to Remove this user ?'),
                                           actions: [
                                             TextButton(onPressed: () {
-
+                                                 context.pop();
                                             }, child: const Text('Cancel')),
-                                            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Remove'))
+                                            TextButton(onPressed: () {
+                                              ref.read(userControllerProvider.notifier).removeUser(userId: user.uid);
+                                            }, child: userController.isLoading ? Center(child: const CircularProgressIndicator()) : const Text('Remove'))
                                           ]
                                       );
                                     });
