@@ -10,6 +10,7 @@ class AdminDashboard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final bookState = ref.watch(bookStreamProvider);
+    final bookController = ref.watch(bookControllerProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Admin Dashboard'),
@@ -54,13 +55,19 @@ class AdminDashboard extends ConsumerWidget {
                                       content: const Text('Are you sure you want to delete this book?'),
                                       actions: [
                                         TextButton(onPressed: () {
+                                          context.pop();
 
                                         }, child: const Text('Cancel')),
-                                        TextButton(onPressed: () => Navigator.pop(context), child: const Text('Delete'))
+                                        TextButton(
+                                            onPressed: (){
+                                              context.pop();
+                                              ref.read(bookControllerProvider.notifier).removeBook(
+                                                  bookId: book.id, imageId: book.imageId, fileId: book.fileId);
+                                            }, child: const Text('Delete'))
                                       ]
                                     );
                                   });
-                                }, icon: const Icon(Icons.delete))
+                                }, icon: bookController.isLoading ? const CircularProgressIndicator() : const Icon(Icons.delete))
                               ],
                             ),
                           ),
