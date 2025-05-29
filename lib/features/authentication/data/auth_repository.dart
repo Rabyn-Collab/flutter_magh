@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magh/core/api.dart';
 import 'package:magh/core/exception/api_exception.dart';
+import 'package:magh/features/authentication/domain/user.dart';
 import 'package:magh/features/shared/client_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -13,10 +14,10 @@ class AuthRepository{
 
   AuthRepository(this.dio);
 
-  Future<void> userLogin (Map<String, dynamic> amp) async{
+  Future<User> userLogin (Map<String, dynamic> amp) async{
     try{
-    final response =   await dio.post(login, data: amp);
-      print(response.data);
+    final response =  await dio.post(login, data: amp);
+     return User.fromJson(response.data);
     }on DioException catch(err){
       throw ApiException(err).errorMessage;
     }

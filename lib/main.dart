@@ -3,16 +3,31 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magh/routes/app_routes.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'firebase_options.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
+part 'main.g.dart';
+
+
+@riverpod
+Box hiveBox(Ref ref) {
+  throw UnimplementedError();
+}
 
 void main  () async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-
   );
-  runApp(ProviderScope(child: const Main()));
+
+  await Hive.initFlutter();
+  final bxData = await Hive.openBox('box');
+  runApp(ProviderScope(
+      overrides: [
+        hiveBoxProvider.overrideWithValue(bxData),
+      ],
+      child: const Main()));
 }
 
 class Main extends ConsumerWidget {
