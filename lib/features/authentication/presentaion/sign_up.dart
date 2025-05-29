@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -8,7 +6,6 @@ import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magh/core/app_theme/app_sizes.dart';
 import 'package:magh/features/authentication/presentaion/controllers/sign_up_provider.dart';
-import 'package:magh/features/shared/image_provider.dart';
 import 'package:magh/features/shared/validator_provider.dart';
 
 
@@ -38,7 +35,7 @@ class _SignUpState extends ConsumerState<SignUp> {
     final signUpState = ref.watch(signUpControllerProvider);
     final mode = ref.watch(validateModeControllerProvider(id: 2));
     final passShow = ref.watch(passControllerProvider(id: 2));
-    final image = ref.watch(imageControllerProvider);
+
 
     return Scaffold(
       appBar: AppBar(
@@ -108,37 +105,13 @@ class _SignUpState extends ConsumerState<SignUp> {
                   ]),
                 ),
                 AppSizes.gapH20,
-                InkWell(
-                  onTap: (){
-                    ref.read(imageControllerProvider.notifier).pickImage();
-                  },
-                  child: Container(
-                    height: 100,
-                     decoration: BoxDecoration(
-                       border: Border.all(color: Colors.black)
-                     ),
-                     child: Center(child:
-                    image == null ?  Text('Select an Image'): Image.file(File(image.path))),
-                  ),
-                ),
+
                 AppSizes.gapH20,
                 ElevatedButton(
                     onPressed: signUpState.isLoading ? null: (){
                       FocusScope.of(context).unfocus();
                       if(_formKey.currentState!.saveAndValidate(focusOnInvalid: false)){
                         final map = _formKey.currentState!.value;
-                        if(image == null){
-                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              duration: Duration(seconds: 1),
-                              content: Text('Please Select an Image')));
-                        }else{
-                          ref.read(signUpControllerProvider.notifier).userSignUp(
-                              image: image,
-                              phone: int.parse(map['phone']),
-                              email: map['email'],
-                              password: map['password'], username: map['username']);
-                        }
 
                       }else{
                         ref.read(validateModeControllerProvider(id: 2).notifier).change();

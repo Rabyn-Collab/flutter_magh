@@ -1,4 +1,10 @@
 
 
 
-const baseUrl = 'http://192.168.194.1:5000';
+const baseUrl = 'https://mern-magn.onrender.com//api';
+
+/// users Api
+const login = '/users/login';
+const register = '/users/register';
+
+///products Api
