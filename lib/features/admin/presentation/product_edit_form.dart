@@ -4,44 +4,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
-import 'package:go_router/go_router.dart';
 import 'package:magh/core/app_theme/app_sizes.dart';
-import 'package:magh/features/books/domain/book.dart';
-import 'package:magh/features/books/presentation/controllers/book_controller.dart';
-import 'package:magh/features/shared/file_provider.dart';
 import 'package:magh/features/shared/image_provider.dart';
 import 'package:magh/features/shared/validator_provider.dart';
 
-class BookEditForm extends ConsumerStatefulWidget {
-  final Book book;
-  const BookEditForm({super.key, required this.book});
+class ProductEditForm extends ConsumerStatefulWidget {
+
+  const ProductEditForm({super.key});
 
   @override
-  ConsumerState createState() => _BookEditFormState();
+  ConsumerState createState() => _ProductEditFormState();
 }
 
-class _BookEditFormState extends ConsumerState<BookEditForm> {
+class _ProductEditFormState extends ConsumerState<ProductEditForm> {
   final _formKey = GlobalKey<FormBuilderState>();
   @override
   Widget build(BuildContext context) {
 
-    ref.listen(bookControllerProvider, (prev, next){
-      next.maybeWhen(
-          data: (data){
-            context.pop();
-          },
-          error: (err, st) =>
-              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text(err.toString()),
+    // ref.listen(bookControllerProvider, (prev, next){
+    //   next.maybeWhen(
+    //       data: (data){
+    //         context.pop();
+    //       },
+    //       error: (err, st) =>
+    //           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    //             content: Text(err.toString()),
+    //
+    //           )),
+    //       orElse: () => null
+    //   );
+    // });
 
-              )),
-          orElse: () => null
-      );
-    });
 
-    final file = ref.watch(fileControllerProvider);
     final image = ref.watch(imageControllerProvider);
-    final bookState = ref.watch(bookControllerProvider);
+
     final mode = ref.watch(validateModeControllerProvider(id: 3));
     return Scaffold(
         appBar: AppBar(
@@ -56,7 +52,7 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
                 children: [
                   FormBuilderTextField(
                     name: 'title',
-                    initialValue: widget.book.title,
+                   // initialValue: widget.book.title,
                     decoration: InputDecoration(
                         hintText: 'Title'
                     ),
@@ -68,7 +64,7 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
 
                   FormBuilderTextField(
                     name: 'author',
-                    initialValue: widget.book.author ,
+                  //  initialValue: widget.book.author ,
                     decoration: InputDecoration(
                         hintText: 'Author'
                     ),
@@ -79,7 +75,7 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
                   AppSizes.gapH16,
                   FormBuilderTextField(
                     name: 'publisher',
-                    initialValue: widget.book.publisher ,
+                  //  initialValue: widget.book.publisher ,
                     decoration: InputDecoration(
                         hintText: 'Publisher'
                     ),
@@ -90,7 +86,7 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
                   AppSizes.gapH16,
                   FormBuilderTextField(
                     name: 'price',
-                    initialValue: widget.book.price.toString() ,
+                   // initialValue: widget.book.price.toString() ,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                         hintText: 'Price'
@@ -102,7 +98,7 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
                   AppSizes.gapH16,
                   FormBuilderTextField(
                     name: 'description',
-                    initialValue: widget.book.description ,
+                   // initialValue: widget.book.description ,
                     keyboardType: TextInputType.text,
                     decoration: InputDecoration(
                         hintText: 'Description'
@@ -114,7 +110,7 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
                   AppSizes.gapH16,
                   FormBuilderDropdown(
                     name: 'genre',
-                    initialValue: widget.book.genre,
+                 //   initialValue: widget.book.genre,
                     hint: Text('Genre'),
                     items: [
                       DropdownMenuItem(value: 'Fiction', child: Text('Fiction')),
@@ -132,61 +128,37 @@ class _BookEditFormState extends ConsumerState<BookEditForm> {
                   AppSizes.gapH16,
                   AppSizes.gapH16,
 
-                  InkWell(
-                      onTap: (){
-                        ref.read(imageControllerProvider.notifier).pickImage();
-                      },
-                      child: Container(
-
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black)
-                        ),
-                        height: 100,
-                        child: image == null ? CachedNetworkImage(imageUrl: widget.book.imageUrl): Image.file(File(image.path)),
-                      )
-                  ),
-                  AppSizes.gapH16,
-                  AppSizes.gapH16,
-                  InkWell(
-                      onTap: (){
-                        ref.read(fileControllerProvider.notifier).pickFile();
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black)
-                        ),
-                        height: 50,
-                        child: Center(child: Text(file == null ? widget.book.fileUrl : file.path)),
-                      )
-                  ),
+                  // InkWell(
+                  //     onTap: (){
+                  //       ref.read(imageControllerProvider.notifier).pickImage();
+                  //     },
+                  //     child: Container(
+                  //
+                  //       decoration: BoxDecoration(
+                  //           border: Border.all(color: Colors.black)
+                  //       ),
+                  //       height: 100,
+                  //       child: image == null ? CachedNetworkImage(imageUrl: widget.book.imageUrl): Image.file(File(image.path)),
+                  //     )
+                  // ),
                   AppSizes.gapH16,
                   AppSizes.gapH16,
 
                   ElevatedButton(
-                      onPressed: bookState.isLoading ? null: (){
+                      onPressed:
+                      //bookState.isLoading ? null:
+                          (){
                         if(_formKey.currentState!.saveAndValidate(focusOnInvalid: false)){
-                          ref.read(bookControllerProvider.notifier).updateBook(
-                              bookId: widget.book.id,
-                              file: file,
-                              image: image,
-                              title: _formKey.currentState!.value['title'],
-                              genre: _formKey.currentState!.value['genre'],
-                              price: int.parse(_formKey.currentState!.value['price']),
-                              publisher:  _formKey.currentState!.value['publisher'],
-                              author: _formKey.currentState!.value['author'],
-                              description: _formKey.currentState!.value['description'],
-                              imageUrl:widget.book.imageUrl,
-                              fileUrl: widget.book.fileUrl,
-                              imageId: widget.book.imageId,
-                              fileId: widget.book.fileId
-                          );
+
                         }else{
                           ref.read(validateModeControllerProvider(id: 3).notifier).change();
                         }
 
 
 
-                      }, child: bookState.isLoading ? Center(child: CircularProgressIndicator()): Text('Submit'))
+                      }, child:
+                  //bookState.isLoading ? Center(child: CircularProgressIndicator()):
+                  Text('Submit'))
 
                 ],
               )

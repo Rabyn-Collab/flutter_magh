@@ -1,7 +1,7 @@
 
 
 
-const baseUrl = 'https://mern-magn.onrender.com//api';
+const baseUrl = 'https://mern-magn.onrender.com/api';
 
 /// users Api
 const login = '/users/login';

@@ -1,18 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magh/features/admin/presentation/admin_dashboard.dart';
-import 'package:magh/features/admin/presentation/book_edit_form.dart';
-import 'package:magh/features/admin/presentation/user_dashboard.dart';
-import 'package:magh/features/admin/presentation/user_edit_form.dart';
 import 'package:magh/features/authentication/presentaion/login.dart';
 import 'package:magh/features/authentication/presentaion/sign_up.dart';
-import 'package:magh/features/books/domain/book.dart';
-import 'package:magh/features/books/presentation/book_detail.dart';
-import 'package:magh/features/books/presentation/book_form.dart';
-import 'package:magh/features/home/domain/user_data.dart';
 import 'package:magh/features/home/presentation/home_page.dart';
-import 'package:magh/features/pdf/pdf_page.dart';
-import 'package:magh/features/shared/user_stream_provider.dart';
+import 'package:magh/features/shared/user_state_provider.dart';
 import 'package:magh/routes/route_enums.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
@@ -21,10 +13,10 @@ part 'app_routes.g.dart';
 
 @riverpod
 GoRouter  router(Ref ref) {
-  final userState = ref.watch(userStreamProvider);
+  final userState = ref.watch(userStateProviderProvider);
   return  GoRouter(
     redirect: (context, state){
-      final authenticated = userState.valueOrNull !=null;
+      final authenticated = userState.token.isNotEmpty;
       final authenticating = (state.matchedLocation == '/login' || state.matchedLocation == '/signUp');
       if(authenticated == false){
         return authenticating ? null : '/login';
@@ -38,22 +30,8 @@ GoRouter  router(Ref ref) {
             return NoTransitionPage(child: HomePage());
           },
           routes: [
-            GoRoute(
-                path: 'book-detail',
-              name: AppRoute.bookDetail.name,
-              pageBuilder: (context, state){
-                final book = state.extra as Book;
-                return NoTransitionPage(child: BookDetail(book: book));
-              },
-            ),
-            GoRoute(
-              path: 'pdf',
-              name: AppRoute.pdf.name,
-              pageBuilder: (context, state){
-                final bookUrl = state.extra as String;
-                return NoTransitionPage(child: PdfPage(pdfUrl:bookUrl));
-              },
-            )
+
+
           ]
         ),
 
@@ -64,21 +42,7 @@ GoRouter  router(Ref ref) {
               return NoTransitionPage(child: AdminDashboard());
             }
         ),
-        GoRoute(
-            path: '/users',
-            name: AppRoute.users.name,
-            pageBuilder: (context, state){
-              return NoTransitionPage(child: UserDashboard());
-            }
-        ),
-        GoRoute(
-            path: '/user-edit',
-            name: AppRoute.userEdit.name,
-            pageBuilder: (context, state){
-              final user = state.extra as UserData;
-              return NoTransitionPage(child: UserEditForm(user: user));
-            }
-        ),
+
 
         GoRoute(
             path: '/login',
@@ -93,20 +57,8 @@ GoRouter  router(Ref ref) {
               return NoTransitionPage(child: SignUp());
             }
         ),
-        GoRoute(
-            path: '/book-form',
-            name: AppRoute.bookForm.name,
-            pageBuilder: (context, state){
-              return NoTransitionPage(child: BookForm());
-            }
-        ),
-        GoRoute(
-            path: '/book-edit',
-            name: AppRoute.bookEdit.name,
-            pageBuilder: (context, state){
-              return NoTransitionPage(child: BookEditForm(book: state.extra as Book));
-            }
-        )
+
+
       ]
   );
 }

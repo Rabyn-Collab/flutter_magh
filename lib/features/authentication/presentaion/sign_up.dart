@@ -72,23 +72,6 @@ class _SignUpState extends ConsumerState<SignUp> {
                 AppSizes.gapH16,
 
                 FormBuilderTextField(
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(10)
-                  ],
-                  name: 'phone',
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                      hintText: 'Phone'
-                  ),
-                  validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.minLength(10),
-                    FormBuilderValidators.required(),
-
-                  ]),
-                ),
-                AppSizes.gapH16,
-
-                FormBuilderTextField(
                   name: 'password',
                   keyboardType: TextInputType.emailAddress,
                   obscureText: passShow ? false : true,
@@ -112,6 +95,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                       FocusScope.of(context).unfocus();
                       if(_formKey.currentState!.saveAndValidate(focusOnInvalid: false)){
                         final map = _formKey.currentState!.value;
+                        ref.read(signUpControllerProvider.notifier).userSignUp(map);
 
                       }else{
                         ref.read(validateModeControllerProvider(id: 2).notifier).change();

@@ -14,11 +14,13 @@ class AuthRepository{
 
   AuthRepository(this.dio);
 
-  Future<User> userLogin (Map<String, dynamic> amp) async{
+  Future<User> userLogin (Map<String, dynamic> map) async{
+
     try{
-    final response =  await dio.post(login, data: amp);
+    final response =  await dio.post(login, data: map);
      return User.fromJson(response.data);
     }on DioException catch(err){
+
       throw ApiException(err).errorMessage;
     }
   }

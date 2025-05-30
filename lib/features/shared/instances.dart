@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 class FirebaseInstances{
   static final fireAuth = FirebaseAuth.instance;
   static final userDb = FirebaseFirestore.instance.collection('users');
-  static final bookDb = FirebaseFirestore.instance.collection('books');
+  static final bookDb = FirebaseFirestore.instance.collection('products');
 
 }
 

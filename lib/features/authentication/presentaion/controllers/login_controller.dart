@@ -1,4 +1,5 @@
 import 'package:magh/features/authentication/data/auth_repository.dart';
+import 'package:magh/features/shared/user_state_provider.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'login_controller.g.dart';
@@ -13,6 +14,9 @@ class LoginController extends _$LoginController {
 
   Future<void> userLogin (Map<String, dynamic> data) async{
     state = const AsyncLoading();
-    state  = await AsyncValue.guard(() => ref.read(authRepoProvider).userLogin(data));
+    state  = await AsyncValue.guard(() async{
+      final response = await ref.read(authRepoProvider).userLogin(data);
+      ref.read(userStateProviderProvider.notifier).setUser(response);
+    });
   }
 }
