@@ -8,3 +8,4 @@ const login = '/users/login';
 const register = '/users/register';
 
 ///products Api
+const products = '/products';
