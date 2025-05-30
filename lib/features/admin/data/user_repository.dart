@@ -1,12 +1,5 @@
-
-
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:magh/features/cloudinary/data/cloudinary_repository.dart';
-import 'package:magh/features/cloudinary/domain/cloudinary_response.dart';
-import 'package:magh/features/shared/instances.dart';
 
 class UserRepository {
 
@@ -21,18 +14,7 @@ class UserRepository {
    String? imageId,
   }) async {
     try{
-      CloudinaryResponse? response;
-      if(image != null && imageId != null){
-          response = await CloudinaryRepository.updateImageOrFile(File(image.path), imageId);
-        }
 
-      await FirebaseInstances.userDb.doc(userId).update({
-        'email': email,
-        'username': username,
-        'phone': phone,
-        'role': role,
-        if(response != null) 'image': response.secure_url ,
-      });
     }on FirebaseException catch (err){
       throw '${err.message}';
     }
@@ -43,7 +25,7 @@ class UserRepository {
     required String userId
   }) async {
     try{
-      await CloudinaryRepository.removeUser(userId);
+
     }on FirebaseException catch (err){
       throw '${err.message}';
     }
