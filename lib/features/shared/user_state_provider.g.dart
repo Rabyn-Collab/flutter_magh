@@ -6,7 +6,7 @@ part of 'user_state_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userStateProviderHash() => r'3f4717ed522ce428ad9f1b0d5b266c0e5d58946d';
+String _$userStateProviderHash() => r'6febcb259a975ded8eecc77aa12017602a73f7bf';
 
 /// See also [UserStateProvider].
 @ProviderFor(UserStateProvider)
@@ -14,10 +14,9 @@ final userStateProviderProvider =
     AutoDisposeNotifierProvider<UserStateProvider, User>.internal(
       UserStateProvider.new,
       name: r'userStateProviderProvider',
-      debugGetCreateSourceHash:
-          const bool.fromEnvironment('dart.vm.product')
-              ? null
-              : _$userStateProviderHash,
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$userStateProviderHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:magh/core/api.dart';
 import 'package:magh/core/exception/api_exception.dart';
 import 'package:magh/features/products/domain/product.dart';
@@ -23,7 +24,19 @@ class ProductRepository {
       throw ApiException(err).errorMessage;
     }
   }
-  
+
+
+  Future<void> addProduct ({required Map<String, dynamic> data, required XFile image, required String token}) async{
+    final formData = FormData.fromMap({
+      ...data,
+      'image': await MultipartFile.fromFile(image.path, filename: image.name),
+    });
+    try{
+       await client.post(products, data: formData, options: Options(headers: {'Authorization': token}));
+    }on DioException catch(err){
+      throw ApiException(err).errorMessage;
+    }
+  }
 
 }
 

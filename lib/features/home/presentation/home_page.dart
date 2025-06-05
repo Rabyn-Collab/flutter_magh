@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:magh/features/home/presentation/widgets/drawer_widget.dart';
+import 'package:magh/features/products/presentation/product_list.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -11,10 +13,14 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
           title: const Text('Shop App'),
       ),
-     // drawer: DrawerWidget(),
+      drawer: DrawerWidget(),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Container()
+        child: ListView(
+          children: [
+            ProductList(),
+          ],
+        )
       ),
     );
   }

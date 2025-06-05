@@ -73,41 +73,34 @@ class _$UserDataCopyWithImpl<$Res, $Val extends UserData>
   }) {
     return _then(
       _value.copyWith(
-            username:
-                null == username
-                    ? _value.username
-                    : username // ignore: cast_nullable_to_non_nullable
-                        as String,
-            email:
-                null == email
-                    ? _value.email
-                    : email // ignore: cast_nullable_to_non_nullable
-                        as String,
-            image:
-                null == image
-                    ? _value.image
-                    : image // ignore: cast_nullable_to_non_nullable
-                        as String,
-            phone:
-                null == phone
-                    ? _value.phone
-                    : phone // ignore: cast_nullable_to_non_nullable
-                        as int,
-            uid:
-                null == uid
-                    ? _value.uid
-                    : uid // ignore: cast_nullable_to_non_nullable
-                        as String,
-            role:
-                null == role
-                    ? _value.role
-                    : role // ignore: cast_nullable_to_non_nullable
-                        as String,
-            public_id:
-                null == public_id
-                    ? _value.public_id
-                    : public_id // ignore: cast_nullable_to_non_nullable
-                        as String,
+            username: null == username
+                ? _value.username
+                : username // ignore: cast_nullable_to_non_nullable
+                      as String,
+            email: null == email
+                ? _value.email
+                : email // ignore: cast_nullable_to_non_nullable
+                      as String,
+            image: null == image
+                ? _value.image
+                : image // ignore: cast_nullable_to_non_nullable
+                      as String,
+            phone: null == phone
+                ? _value.phone
+                : phone // ignore: cast_nullable_to_non_nullable
+                      as int,
+            uid: null == uid
+                ? _value.uid
+                : uid // ignore: cast_nullable_to_non_nullable
+                      as String,
+            role: null == role
+                ? _value.role
+                : role // ignore: cast_nullable_to_non_nullable
+                      as String,
+            public_id: null == public_id
+                ? _value.public_id
+                : public_id // ignore: cast_nullable_to_non_nullable
+                      as String,
           )
           as $Val,
     );
@@ -158,41 +151,34 @@ class __$$UserDataImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$UserDataImpl(
-        username:
-            null == username
-                ? _value.username
-                : username // ignore: cast_nullable_to_non_nullable
-                    as String,
-        email:
-            null == email
-                ? _value.email
-                : email // ignore: cast_nullable_to_non_nullable
-                    as String,
-        image:
-            null == image
-                ? _value.image
-                : image // ignore: cast_nullable_to_non_nullable
-                    as String,
-        phone:
-            null == phone
-                ? _value.phone
-                : phone // ignore: cast_nullable_to_non_nullable
-                    as int,
-        uid:
-            null == uid
-                ? _value.uid
-                : uid // ignore: cast_nullable_to_non_nullable
-                    as String,
-        role:
-            null == role
-                ? _value.role
-                : role // ignore: cast_nullable_to_non_nullable
-                    as String,
-        public_id:
-            null == public_id
-                ? _value.public_id
-                : public_id // ignore: cast_nullable_to_non_nullable
-                    as String,
+        username: null == username
+            ? _value.username
+            : username // ignore: cast_nullable_to_non_nullable
+                  as String,
+        email: null == email
+            ? _value.email
+            : email // ignore: cast_nullable_to_non_nullable
+                  as String,
+        image: null == image
+            ? _value.image
+            : image // ignore: cast_nullable_to_non_nullable
+                  as String,
+        phone: null == phone
+            ? _value.phone
+            : phone // ignore: cast_nullable_to_non_nullable
+                  as int,
+        uid: null == uid
+            ? _value.uid
+            : uid // ignore: cast_nullable_to_non_nullable
+                  as String,
+        role: null == role
+            ? _value.role
+            : role // ignore: cast_nullable_to_non_nullable
+                  as String,
+        public_id: null == public_id
+            ? _value.public_id
+            : public_id // ignore: cast_nullable_to_non_nullable
+                  as String,
       ),
     );
   }

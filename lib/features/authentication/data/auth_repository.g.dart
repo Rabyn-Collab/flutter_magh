@@ -13,8 +13,9 @@ String _$authRepoHash() => r'991ccf4f2a63fba8e2338b643b013a40d5de2cee';
 final authRepoProvider = AutoDisposeProvider<AuthRepository>.internal(
   authRepo,
   name: r'authRepoProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$authRepoHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$authRepoHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

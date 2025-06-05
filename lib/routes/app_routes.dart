@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magh/features/admin/presentation/admin_dashboard.dart';
+import 'package:magh/features/admin/presentation/product_form.dart';
 import 'package:magh/features/authentication/presentaion/login.dart';
 import 'package:magh/features/authentication/presentaion/sign_up.dart';
 import 'package:magh/features/home/presentation/home_page.dart';
@@ -15,6 +16,7 @@ part 'app_routes.g.dart';
 GoRouter  router(Ref ref) {
   final userState = ref.watch(userStateProviderProvider);
   return  GoRouter(
+    initialLocation: '/',
     redirect: (context, state){
       final authenticated = userState.token.isNotEmpty;
       final authenticating = (state.matchedLocation == '/login' || state.matchedLocation == '/signUp');
@@ -40,7 +42,16 @@ GoRouter  router(Ref ref) {
             name: AppRoute.admin.name,
             pageBuilder: (context, state){
               return NoTransitionPage(child: AdminDashboard());
-            }
+            },
+          routes: [
+            GoRoute(
+              path: 'productAdd',
+                name: AppRoute.productAdd.name,
+                pageBuilder: (context, state){
+                  return NoTransitionPage(child: ProductForm());
+                }
+            )
+          ]
         ),
 
 
