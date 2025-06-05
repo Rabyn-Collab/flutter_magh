@@ -41,7 +41,7 @@ class AdminDashboard extends ConsumerWidget {
                       child: Row(
                         children: [
                           IconButton(onPressed: (){
-                           // context.pushNamed(AppRoute.bookEdit.name, extra: book);
+                          context.pushNamed(AppRoute.productEdit.name, extra: product);
                           }, icon: const Icon(Icons.edit)),
                           IconButton(onPressed: (){
                             showDialog(context: context, builder:(context) {

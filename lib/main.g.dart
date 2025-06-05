@@ -13,9 +13,8 @@ String _$hiveBoxHash() => r'773d91389aa94960522895613a3664109910d527';
 final hiveBoxProvider = AutoDisposeProvider<Box>.internal(
   hiveBox,
   name: r'hiveBoxProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$hiveBoxHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$hiveBoxHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

@@ -21,8 +21,14 @@ class ProductController extends _$ProductController {
 
   Future<void> addProduct (Map<String, dynamic> data, XFile image  ) async{
     state = const AsyncLoading();
-    final user =  ref.read(userStateProviderProvider);
-    state  = await AsyncValue.guard(() =>ref.read(productRepoProvider).addProduct(data: data, image: image, token: user.token));
+
+    state  = await AsyncValue.guard(() =>ref.read(productRepoProvider).addProduct(data: data, image: image,));
+
+  }
+  Future<void> updateProduct ({required Map<String, dynamic> data, XFile? image, required String productId}  ) async{
+    state = const AsyncLoading();
+
+    state  = await AsyncValue.guard(() =>ref.read(productRepoProvider).updateProduct(data: data, image: image, productId: productId));
 
   }
 }

@@ -17,6 +17,7 @@ class ProductList extends ConsumerWidget {
             shrinkWrap: true,
             itemCount: data.length,
             itemBuilder: (context, index) {
+
               final product = data[index];
             return GridTile(
                 footer: Container(

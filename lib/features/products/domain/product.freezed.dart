@@ -83,38 +83,46 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
   }) {
     return _then(
       _value.copyWith(
-            title: null == title
-                ? _value.title
-                : title // ignore: cast_nullable_to_non_nullable
-                      as String,
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            description: null == description
-                ? _value.description
-                : description // ignore: cast_nullable_to_non_nullable
-                      as String,
-            price: null == price
-                ? _value.price
-                : price // ignore: cast_nullable_to_non_nullable
-                      as int,
-            image: null == image
-                ? _value.image
-                : image // ignore: cast_nullable_to_non_nullable
-                      as String,
-            rating: null == rating
-                ? _value.rating
-                : rating // ignore: cast_nullable_to_non_nullable
-                      as int,
-            category: null == category
-                ? _value.category
-                : category // ignore: cast_nullable_to_non_nullable
-                      as String,
-            brand: null == brand
-                ? _value.brand
-                : brand // ignore: cast_nullable_to_non_nullable
-                      as String,
+            title:
+                null == title
+                    ? _value.title
+                    : title // ignore: cast_nullable_to_non_nullable
+                        as String,
+            id:
+                null == id
+                    ? _value.id
+                    : id // ignore: cast_nullable_to_non_nullable
+                        as String,
+            description:
+                null == description
+                    ? _value.description
+                    : description // ignore: cast_nullable_to_non_nullable
+                        as String,
+            price:
+                null == price
+                    ? _value.price
+                    : price // ignore: cast_nullable_to_non_nullable
+                        as int,
+            image:
+                null == image
+                    ? _value.image
+                    : image // ignore: cast_nullable_to_non_nullable
+                        as String,
+            rating:
+                null == rating
+                    ? _value.rating
+                    : rating // ignore: cast_nullable_to_non_nullable
+                        as int,
+            category:
+                null == category
+                    ? _value.category
+                    : category // ignore: cast_nullable_to_non_nullable
+                        as String,
+            brand:
+                null == brand
+                    ? _value.brand
+                    : brand // ignore: cast_nullable_to_non_nullable
+                        as String,
           )
           as $Val,
     );
@@ -166,38 +174,46 @@ class __$$ProductImplCopyWithImpl<$Res>
   }) {
     return _then(
       _$ProductImpl(
-        title: null == title
-            ? _value.title
-            : title // ignore: cast_nullable_to_non_nullable
-                  as String,
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        description: null == description
-            ? _value.description
-            : description // ignore: cast_nullable_to_non_nullable
-                  as String,
-        price: null == price
-            ? _value.price
-            : price // ignore: cast_nullable_to_non_nullable
-                  as int,
-        image: null == image
-            ? _value.image
-            : image // ignore: cast_nullable_to_non_nullable
-                  as String,
-        rating: null == rating
-            ? _value.rating
-            : rating // ignore: cast_nullable_to_non_nullable
-                  as int,
-        category: null == category
-            ? _value.category
-            : category // ignore: cast_nullable_to_non_nullable
-                  as String,
-        brand: null == brand
-            ? _value.brand
-            : brand // ignore: cast_nullable_to_non_nullable
-                  as String,
+        title:
+            null == title
+                ? _value.title
+                : title // ignore: cast_nullable_to_non_nullable
+                    as String,
+        id:
+            null == id
+                ? _value.id
+                : id // ignore: cast_nullable_to_non_nullable
+                    as String,
+        description:
+            null == description
+                ? _value.description
+                : description // ignore: cast_nullable_to_non_nullable
+                    as String,
+        price:
+            null == price
+                ? _value.price
+                : price // ignore: cast_nullable_to_non_nullable
+                    as int,
+        image:
+            null == image
+                ? _value.image
+                : image // ignore: cast_nullable_to_non_nullable
+                    as String,
+        rating:
+            null == rating
+                ? _value.rating
+                : rating // ignore: cast_nullable_to_non_nullable
+                    as int,
+        category:
+            null == category
+                ? _value.category
+                : category // ignore: cast_nullable_to_non_nullable
+                    as String,
+        brand:
+            null == brand
+                ? _value.brand
+                : brand // ignore: cast_nullable_to_non_nullable
+                    as String,
       ),
     );
   }

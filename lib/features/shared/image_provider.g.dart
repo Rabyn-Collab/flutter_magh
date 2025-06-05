@@ -14,9 +14,10 @@ final imageControllerProvider =
     AutoDisposeNotifierProvider<ImageController, XFile?>.internal(
       ImageController.new,
       name: r'imageControllerProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$imageControllerHash,
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$imageControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

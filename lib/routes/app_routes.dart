@@ -1,10 +1,12 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magh/features/admin/presentation/admin_dashboard.dart';
+import 'package:magh/features/admin/presentation/product_edit_form.dart';
 import 'package:magh/features/admin/presentation/product_form.dart';
 import 'package:magh/features/authentication/presentaion/login.dart';
 import 'package:magh/features/authentication/presentaion/sign_up.dart';
 import 'package:magh/features/home/presentation/home_page.dart';
+import 'package:magh/features/products/domain/product.dart';
 import 'package:magh/features/shared/user_state_provider.dart';
 import 'package:magh/routes/route_enums.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -49,6 +51,13 @@ GoRouter  router(Ref ref) {
                 name: AppRoute.productAdd.name,
                 pageBuilder: (context, state){
                   return NoTransitionPage(child: ProductForm());
+                }
+            ),
+            GoRoute(
+                path: 'productEdit',
+                name: AppRoute.productEdit.name,
+                pageBuilder: (context, state){
+                  return NoTransitionPage(child: ProductEditForm(product: state.extra as Product));
                 }
             )
           ]

@@ -13,9 +13,8 @@ String _$getProductsHash() => r'3b697f1012e33df03c316ae139692a2ada4f8381';
 final getProductsProvider = AutoDisposeFutureProvider<List<Product>>.internal(
   getProducts,
   name: r'getProductsProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$getProductsHash,
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$getProductsHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -23,7 +22,7 @@ final getProductsProvider = AutoDisposeFutureProvider<List<Product>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef GetProductsRef = AutoDisposeFutureProviderRef<List<Product>>;
-String _$productControllerHash() => r'ac4ad6afe57afc1e40ee2d591b8be72c21e8d89e';
+String _$productControllerHash() => r'3cd21e0b3480dad800d53fe7b1e8ef4f0c3890d8';
 
 /// See also [ProductController].
 @ProviderFor(ProductController)
@@ -31,9 +30,10 @@ final productControllerProvider =
     AutoDisposeAsyncNotifierProvider<ProductController, void>.internal(
       ProductController.new,
       name: r'productControllerProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$productControllerHash,
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$productControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );

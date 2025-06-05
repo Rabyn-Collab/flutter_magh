@@ -19,6 +19,7 @@ class ProductRepository {
   Future<List<Product>> getProducts () async{
     try{
       final response = await client.get(products);
+      print(response.data);
       return (response.data as List).map((e) => Product.fromJson(e)).toList();
     }on DioException catch(err){
       throw ApiException(err).errorMessage;
@@ -26,13 +27,25 @@ class ProductRepository {
   }
 
 
-  Future<void> addProduct ({required Map<String, dynamic> data, required XFile image, required String token}) async{
+  Future<void> addProduct ({required Map<String, dynamic> data, required XFile image}) async{
     final formData = FormData.fromMap({
       ...data,
       'image': await MultipartFile.fromFile(image.path, filename: image.name),
     });
     try{
-       await client.post(products, data: formData, options: Options(headers: {'Authorization': token}));
+       await client.post(products, data: formData);
+    }on DioException catch(err){
+      throw ApiException(err).errorMessage;
+    }
+  }
+
+  Future<void> updateProduct ({required Map<String, dynamic> data,  XFile? image, required String productId}) async{
+    final formData = FormData.fromMap({
+      ...data,
+      if(image != null) 'image': await MultipartFile.fromFile(image.path, filename: image.name),
+    });
+    try{
+      await client.patch('$products/$productId', data: formData);
     }on DioException catch(err){
       throw ApiException(err).errorMessage;
     }
@@ -43,5 +56,5 @@ class ProductRepository {
 
 @riverpod
 ProductRepository productRepo (Ref ref) {
-  return ProductRepository(ref.watch(clientProvider));
+  return ProductRepository(ref.watch(authClientProvider));
 }

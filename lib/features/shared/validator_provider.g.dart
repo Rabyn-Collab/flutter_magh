@@ -86,9 +86,10 @@ class ValidateModeControllerProvider
         () => ValidateModeController()..id = id,
         from: validateModeControllerProvider,
         name: r'validateModeControllerProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$validateModeControllerHash,
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$validateModeControllerHash,
         dependencies: ValidateModeControllerFamily._dependencies,
         allTransitiveDependencies:
             ValidateModeControllerFamily._allTransitiveDependencies,
@@ -222,9 +223,10 @@ class PassControllerProvider
         () => PassController()..id = id,
         from: passControllerProvider,
         name: r'passControllerProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-            ? null
-            : _$passControllerHash,
+        debugGetCreateSourceHash:
+            const bool.fromEnvironment('dart.vm.product')
+                ? null
+                : _$passControllerHash,
         dependencies: PassControllerFamily._dependencies,
         allTransitiveDependencies:
             PassControllerFamily._allTransitiveDependencies,

@@ -14,9 +14,10 @@ final loginControllerProvider =
     AutoDisposeAsyncNotifierProvider<LoginController, void>.internal(
       LoginController.new,
       name: r'loginControllerProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$loginControllerHash,
+      debugGetCreateSourceHash:
+          const bool.fromEnvironment('dart.vm.product')
+              ? null
+              : _$loginControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
