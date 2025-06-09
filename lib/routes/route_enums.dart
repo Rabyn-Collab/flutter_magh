@@ -8,5 +8,6 @@ enum AppRoute{
   profile,
   admin,
   productAdd,
-  productEdit
+  productEdit,
+  productDetail
 }

@@ -10,6 +10,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'product_repository.g.dart';
 
 
+
 class ProductRepository {
 
 
@@ -19,13 +20,20 @@ class ProductRepository {
   Future<List<Product>> getProducts () async{
     try{
       final response = await client.get(products);
-      print(response.data);
       return (response.data as List).map((e) => Product.fromJson(e)).toList();
     }on DioException catch(err){
       throw ApiException(err).errorMessage;
     }
   }
 
+  Future<Product> getProduct ({required String productId}) async{
+    try{
+      final response = await client.get('$products/$productId');
+      return Product.fromJson(response.data);
+    }on DioException catch(err){
+      throw ApiException(err).errorMessage;
+    }
+  }
 
   Future<void> addProduct ({required Map<String, dynamic> data, required XFile image}) async{
     final formData = FormData.fromMap({
@@ -47,6 +55,17 @@ class ProductRepository {
     try{
       await client.patch('$products/$productId', data: formData);
     }on DioException catch(err){
+      throw ApiException(err).errorMessage;
+    }
+  }
+
+  Future<void> removeProduct ({ required String productId}) async{
+
+    try{
+
+      await client.delete('$products/$productId');
+    }on DioException catch(err){
+
       throw ApiException(err).errorMessage;
     }
   }

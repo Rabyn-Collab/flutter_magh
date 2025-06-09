@@ -7,6 +7,7 @@ import 'package:magh/features/authentication/presentaion/login.dart';
 import 'package:magh/features/authentication/presentaion/sign_up.dart';
 import 'package:magh/features/home/presentation/home_page.dart';
 import 'package:magh/features/products/domain/product.dart';
+import 'package:magh/features/products/presentation/product_detail.dart';
 import 'package:magh/features/shared/user_state_provider.dart';
 import 'package:magh/routes/route_enums.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -34,7 +35,13 @@ GoRouter  router(Ref ref) {
             return NoTransitionPage(child: HomePage());
           },
           routes: [
-
+            GoRoute(
+                path: 'productDetail',
+                name: AppRoute.productDetail.name,
+                pageBuilder: (context, state){
+                  return NoTransitionPage(child: ProductDetail(id: state.extra as String));
+                }
+            ),
 
           ]
         ),

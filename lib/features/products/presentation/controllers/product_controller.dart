@@ -7,11 +7,19 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'product_controller.g.dart';
 
-
+int productIndex = 0;
 @riverpod
 Future<List<Product>> getProducts (Ref ref) async {
+
   return ref.watch(productRepoProvider).getProducts();
 }
+
+@riverpod
+Future<Product> getProduct (Ref ref, {required String productId}) async {
+  ref.keepAlive();
+  return ref.watch(productRepoProvider).getProduct(productId: productId);
+}
+
 
 
 @riverpod
@@ -29,6 +37,13 @@ class ProductController extends _$ProductController {
     state = const AsyncLoading();
 
     state  = await AsyncValue.guard(() =>ref.read(productRepoProvider).updateProduct(data: data, image: image, productId: productId));
+
+  }
+
+  Future<void> removeProduct ({required String productId, required int index}  ) async{
+    productIndex = index;
+    state = const AsyncLoading();
+    state  = await AsyncValue.guard(() =>ref.read(productRepoProvider).removeProduct(productId: productId));
 
   }
 }

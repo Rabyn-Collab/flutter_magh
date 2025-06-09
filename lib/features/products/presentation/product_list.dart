@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:magh/core/api.dart';
 import 'package:magh/features/products/presentation/controllers/product_controller.dart';
+import 'package:magh/routes/route_enums.dart';
 
 
 class ProductList extends ConsumerWidget {
@@ -19,23 +21,28 @@ class ProductList extends ConsumerWidget {
             itemBuilder: (context, index) {
 
               final product = data[index];
-            return GridTile(
-                footer: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.black38,
-                  ),
-                height: 50,
-                child: Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Column(
-                    children: [
-                      Text(product.title, style: const TextStyle(color: Colors.white),),
-                      Text('Rs. ${product.price}', style: const TextStyle(color: Colors.white),),
-                    ],
+            return InkWell(
+              onTap: (){
+                context.pushNamed(AppRoute.productDetail.name, extra: product.id);
+              },
+              child: GridTile(
+                  footer: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black38,
+                    ),
+                  height: 50,
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Column(
+                      children: [
+                        Text(product.title, style: const TextStyle(color: Colors.white),),
+                        Text('Rs. ${product.price}', style: const TextStyle(color: Colors.white),),
+                      ],
+                    ),
                   ),
                 ),
+                  child: CachedNetworkImage(imageUrl: '$base${product.image}', fit: BoxFit.cover,),
               ),
-                child: CachedNetworkImage(imageUrl: '$base${product.image}', fit: BoxFit.cover,),
             );
             },
              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

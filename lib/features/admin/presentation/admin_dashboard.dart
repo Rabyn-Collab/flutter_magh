@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:magh/core/api.dart';
+import 'package:magh/features/products/data/product_repository.dart';
 import 'package:magh/features/products/presentation/controllers/product_controller.dart';
 import 'package:magh/routes/route_enums.dart';
 
@@ -11,7 +12,18 @@ class AdminDashboard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
+    ref.listen(productControllerProvider,(prev, next){
+      next.maybeWhen(
+        data: (data){
+          ref.invalidate(getProductsProvider);
+        } ,
+        orElse: (){},
+      );
+    });
+
     final productState = ref.watch(getProductsProvider);
+    final productController = ref.watch(productControllerProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -19,7 +31,6 @@ class AdminDashboard extends ConsumerWidget {
         actions: [
           IconButton(onPressed: (){
             context.pushNamed(AppRoute.productAdd.name);
-
           }, icon: const Icon(Icons.add))
         ],
       ),
@@ -51,17 +62,17 @@ class AdminDashboard extends ConsumerWidget {
                                 actions: [
                                   TextButton(onPressed: () {
                                     context.pop();
-
                                   }, child: const Text('Cancel')),
                                   TextButton(
                                       onPressed: (){
                                         context.pop();
+                                        ref.read(productControllerProvider.notifier).removeProduct(index: index, productId: product.id);
 
                                       }, child: const Text('Delete'))
                                 ]
                               );
                             });
-                          }, icon: productState.isLoading ? const CircularProgressIndicator() : const Icon(Icons.delete))
+                          }, icon: productController.isLoading && productIndex == index ? const CircularProgressIndicator() : const Icon(Icons.delete))
                         ],
                       ),
                     ),
