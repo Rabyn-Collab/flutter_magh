@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:magh/core/api.dart';
 import 'package:magh/core/app_theme/app_sizes.dart';
+import 'package:magh/features/carts/presentation/controllers/cart_provider.dart';
+import 'package:magh/routes/route_enums.dart';
 
 import 'controllers/product_controller.dart';
 
@@ -37,7 +40,10 @@ class ProductDetail extends ConsumerWidget {
                 ),
 
 
-                ElevatedButton(onPressed: (){}, child: Text('Add To Cart'))
+                ElevatedButton(onPressed: (){
+                  ref.read(cartControllerProvider.notifier).addToCart(data);
+                  context.pushNamed(AppRoute.cart.name);
+                }, child: Text('Add To Cart'))
               ],
             ),
           ),

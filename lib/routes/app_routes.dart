@@ -5,6 +5,7 @@ import 'package:magh/features/admin/presentation/product_edit_form.dart';
 import 'package:magh/features/admin/presentation/product_form.dart';
 import 'package:magh/features/authentication/presentaion/login.dart';
 import 'package:magh/features/authentication/presentaion/sign_up.dart';
+import 'package:magh/features/carts/presentation/cart_page.dart';
 import 'package:magh/features/home/presentation/home_page.dart';
 import 'package:magh/features/products/domain/product.dart';
 import 'package:magh/features/products/presentation/product_detail.dart';
@@ -44,6 +45,13 @@ GoRouter  router(Ref ref) {
             ),
 
           ]
+        ),
+        GoRoute(
+            path: '/cart',
+            name: AppRoute.cart.name,
+            pageBuilder: (context, state){
+              return NoTransitionPage(child: CartPage());
+            }
         ),
 
         GoRoute(
