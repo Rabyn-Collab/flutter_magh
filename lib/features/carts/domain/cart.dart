@@ -38,4 +38,12 @@ part 'cart.g.dart';
     );
   }
 
+  Map<String, dynamic> toJson() => {
+    'title': title,
+    'image': image,
+    'price': price,
+    'qty': qty,
+    'id': id
+  };
+
 }

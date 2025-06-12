@@ -55,4 +55,14 @@ class CartController extends _$CartController {
   }
 
 
+  void clearCart(){
+    state = [];
+    Hive.box<Cart>('carts').clear();
+  }
+
+  int get totalAmount{
+    return state.fold(0, (previousValue, element) => previousValue + element.price * element.qty);
+  }
+
+
 }

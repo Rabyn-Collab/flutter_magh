@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:magh/core/api.dart';
+import 'package:magh/core/app_theme/app_sizes.dart';
 import 'package:magh/features/carts/presentation/controllers/cart_provider.dart';
+import 'package:magh/features/orders/presentation/controllers/order_controller.dart';
 
 
 class CartPage extends ConsumerWidget {
@@ -11,7 +13,26 @@ class CartPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen(orderControllerProvider, (prev, next){
+      next.maybeWhen(
+          data: (data){
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text('Order Placed Successfully'),
+            ));
+          },
+          error: (err, st) =>
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(err.toString()),
+              )),
+          orElse: () => null
+      );
+    });
+
     final carts = ref.watch(cartControllerProvider);
+    final totalAmount = ref.watch(cartControllerProvider.notifier).totalAmount;
+    final orderState = ref.watch(orderControllerProvider);
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Cart Page'),
@@ -22,7 +43,7 @@ class CartPage extends ConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-                child: ListView.separated(
+                child: carts.isEmpty ? Center(child: Text('Cart is empty'),) : ListView.separated(
                   separatorBuilder: (context, index){
                     return Divider();
                   },
@@ -65,7 +86,17 @@ class CartPage extends ConsumerWidget {
                     );
                     }
                 )),
-            ElevatedButton(onPressed: (){}, child: Text('Place an Order')),
+            if(carts.isNotEmpty)   Row(
+             mainAxisAlignment: MainAxisAlignment.end,
+             children: [
+               Text('Total Amount: '),
+               Text(totalAmount.toString())
+             ],
+           ),
+           AppSizes.gapH16,
+           if(carts.isNotEmpty) ElevatedButton(onPressed: (){
+             ref.read(orderControllerProvider.notifier).addOrder(totalAmount: totalAmount, carts: carts);
+           }, child: orderState.isLoading ? Center(child: CircularProgressIndicator()) : Text('Place an Order')),
             SizedBox(height: 20,),
           ],
         ),

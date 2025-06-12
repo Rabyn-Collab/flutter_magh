@@ -11,5 +11,8 @@ const baseUrl = 'https://mern-magn.onrender.com/api';
 const login = '/users/login';
 const register = '/users/register';
 
+// orders Api
+const orders = '/orders';
+
 ///products Api
 const products = '/products';
