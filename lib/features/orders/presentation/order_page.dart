@@ -18,6 +18,7 @@ class OrderPage extends ConsumerWidget {
       body: orderState.when(
           data: (data){
             return ListView.separated(
+              reverse: true,
               separatorBuilder: (context, index) => const Divider(),
               itemCount: data.length,
               itemBuilder: (context, index){
